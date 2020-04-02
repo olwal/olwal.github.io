@@ -2,23 +2,11 @@
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "background": "white",
   "padding": 5,
-  "width": 400,
-  "height": 300,
-  "style": "cell",
   "data": [
+    {"name": "selector122_store"},
+    {"name": "selector123_store"},
     {
-      "name": "Select_store",
-      "values": [
-        {
-          "unit": "",
-          "fields": [{"type": "E", "field": "Country"}],
-          "values": ["United Kingdom"]
-        }
-      ]
-    },
-    {"name": "selector009_store"},
-    {
-      "name": "data-f9b49596b073b0f4ce8f4bfbeb57a40c",
+      "name": "data-6cb824b436480f035bb2606336d6b1a9",
       "values": [
         {
           "Country": "China",
@@ -581,6 +569,14 @@
           "Active": 2764
         },
         {
+          "Country": "China",
+          "Date": "2020-04-01T00:00:00",
+          "Confirmed": 82361,
+          "Deaths": 3316,
+          "Recovered": 76405,
+          "Active": 2640
+        },
+        {
           "Country": "France",
           "Date": "2020-01-24T00:00:00",
           "Confirmed": 2,
@@ -1125,6 +1121,14 @@
           "Active": 39782
         },
         {
+          "Country": "France",
+          "Date": "2020-04-01T00:00:00",
+          "Confirmed": 57749,
+          "Deaths": 4043,
+          "Recovered": 11053,
+          "Active": 42653
+        },
+        {
           "Country": "Germany",
           "Date": "2020-01-28T00:00:00",
           "Confirmed": 4,
@@ -1637,6 +1641,14 @@
           "Active": 54933
         },
         {
+          "Country": "Germany",
+          "Date": "2020-04-01T00:00:00",
+          "Confirmed": 77872,
+          "Deaths": 920,
+          "Recovered": 18700,
+          "Active": 58252
+        },
+        {
           "Country": "Iran",
           "Date": "2020-02-19T00:00:00",
           "Confirmed": 2,
@@ -1971,6 +1983,14 @@
           "Deaths": 2898,
           "Recovered": 14656,
           "Active": 27051
+        },
+        {
+          "Country": "Iran",
+          "Date": "2020-04-01T00:00:00",
+          "Confirmed": 47593,
+          "Deaths": 3036,
+          "Recovered": 15473,
+          "Active": 29084
         },
         {
           "Country": "Italy",
@@ -2461,6 +2481,14 @@
           "Active": 77635
         },
         {
+          "Country": "Italy",
+          "Date": "2020-04-01T00:00:00",
+          "Confirmed": 110574,
+          "Deaths": 13155,
+          "Recovered": 16847,
+          "Active": 80572
+        },
+        {
           "Country": "Spain",
           "Date": "2020-02-01T00:00:00",
           "Confirmed": 1,
@@ -2941,6 +2969,14 @@
           "Active": 68200
         },
         {
+          "Country": "Spain",
+          "Date": "2020-04-01T00:00:00",
+          "Confirmed": 104118,
+          "Deaths": 9387,
+          "Recovered": 22647,
+          "Active": 72084
+        },
+        {
           "Country": "Switzerland",
           "Date": "2020-02-25T00:00:00",
           "Confirmed": 1,
@@ -3229,6 +3265,14 @@
           "Active": 14349
         },
         {
+          "Country": "Switzerland",
+          "Date": "2020-04-01T00:00:00",
+          "Confirmed": 17768,
+          "Deaths": 488,
+          "Recovered": 2967,
+          "Active": 14313
+        },
+        {
           "Country": "Turkey",
           "Date": "2020-03-11T00:00:00",
           "Confirmed": 1,
@@ -3395,6 +3439,14 @@
           "Deaths": 214,
           "Recovered": 243,
           "Active": 13074
+        },
+        {
+          "Country": "Turkey",
+          "Date": "2020-04-01T00:00:00",
+          "Confirmed": 15679,
+          "Deaths": 277,
+          "Recovered": 333,
+          "Active": 15069
         },
         {
           "Country": "US",
@@ -3957,6 +4009,14 @@
           "Active": 177275
         },
         {
+          "Country": "US",
+          "Date": "2020-04-01T00:00:00",
+          "Confirmed": 213372,
+          "Deaths": 4757,
+          "Recovered": 8474,
+          "Active": 200141
+        },
+        {
           "Country": "United Kingdom",
           "Date": "2020-03-11T00:00:00",
           "Confirmed": 459,
@@ -4123,27 +4183,40 @@
           "Deaths": 1793,
           "Recovered": 179,
           "Active": 23509
+        },
+        {
+          "Country": "United Kingdom",
+          "Date": "2020-04-01T00:00:00",
+          "Confirmed": 29865,
+          "Deaths": 2357,
+          "Recovered": 179,
+          "Active": 27329
         }
       ]
     },
     {
       "name": "data_0",
-      "source": "data-f9b49596b073b0f4ce8f4bfbeb57a40c",
+      "source": "data-6cb824b436480f035bb2606336d6b1a9",
       "transform": [
         {"type": "formula", "expr": "toDate(datum[\"Date\"])", "as": "Date"},
         {
-          "type": "fold",
-          "fields": ["Recovered", "Active", "Deaths", "Confirmed"],
-          "as": ["Type", "Count"]
-        },
-        {
-          "type": "filter",
-          "expr": "!(length(data(\"Select_store\"))) || (vlSelectionTest(\"Select_store\", datum))"
+          "type": "formula",
+          "expr": "toNumber(datum[\"Deaths\"])",
+          "as": "Deaths"
         }
       ]
     }
   ],
   "signals": [
+    {"name": "concat_0_height", "value": 200},
+    {"name": "concat_0_concat_0_width", "value": 200},
+    {"name": "concat_0_concat_1_width", "value": 200},
+    {"name": "concat_1_height", "value": 200},
+    {"name": "concat_1_concat_0_width", "value": 200},
+    {"name": "concat_1_concat_1_width", "value": 200},
+    {"name": "concat_2_height", "value": 200},
+    {"name": "concat_2_concat_0_width", "value": 200},
+    {"name": "concat_2_concat_1_width", "value": 200},
     {
       "name": "unit",
       "value": {},
@@ -4152,271 +4225,1602 @@
       ]
     },
     {
-      "name": "Select_Country",
-      "init": "\"United Kingdom\"",
-      "bind": {
-        "input": "select",
-        "options": [
-          "China",
-          "France",
-          "Germany",
-          "Iran",
-          "Italy",
-          "Spain",
-          "Switzerland",
-          "Turkey",
-          "US",
-          "United Kingdom"
-        ]
-      }
-    },
-    {
-      "name": "Select",
-      "update": "vlSelectionResolve(\"Select_store\", \"union\")"
-    },
-    {
-      "name": "selector009",
-      "update": "vlSelectionResolve(\"selector009_store\", \"union\")"
-    },
-    {
-      "name": "Select_tuple",
-      "update": "Select_Country !== null ? {fields: Select_tuple_fields, values: [Select_Country]} : null"
-    },
-    {
-      "name": "Select_tuple_fields",
-      "value": [{"type": "E", "field": "Country"}]
-    },
-    {
-      "name": "Select_modify",
-      "on": [
-        {
-          "events": {"signal": "Select_tuple"},
-          "update": "modify(\"Select_store\", Select_tuple, true)"
-        }
-      ]
-    },
-    {
-      "name": "selector009_Date",
-      "on": [
-        {
-          "events": {"signal": "selector009_translate_delta"},
-          "update": "panLinear(selector009_translate_anchor.extent_x, -selector009_translate_delta.x / width)"
-        },
-        {
-          "events": {"signal": "selector009_zoom_delta"},
-          "update": "zoomLinear(domain(\"x\"), selector009_zoom_anchor.x, selector009_zoom_delta)"
-        },
-        {"events": [{"source": "scope", "type": "dblclick"}], "update": "null"}
-      ]
-    },
-    {
-      "name": "selector009_Count",
-      "on": [
-        {
-          "events": {"signal": "selector009_translate_delta"},
-          "update": "panLinear(selector009_translate_anchor.extent_y, selector009_translate_delta.y / height)"
-        },
-        {
-          "events": {"signal": "selector009_zoom_delta"},
-          "update": "zoomLinear(domain(\"y\"), selector009_zoom_anchor.y, selector009_zoom_delta)"
-        },
-        {"events": [{"source": "scope", "type": "dblclick"}], "update": "null"}
-      ]
-    },
-    {
-      "name": "selector009_tuple",
-      "on": [
-        {
-          "events": [{"signal": "selector009_Date || selector009_Count"}],
-          "update": "selector009_Date && selector009_Count ? {unit: \"\", fields: selector009_tuple_fields, values: [selector009_Date,selector009_Count]} : null"
-        }
-      ]
-    },
-    {
-      "name": "selector009_tuple_fields",
-      "value": [
-        {"field": "Date", "channel": "x", "type": "R"},
-        {"field": "Count", "channel": "y", "type": "R"}
-      ]
-    },
-    {
-      "name": "selector009_translate_anchor",
-      "value": {},
-      "on": [
-        {
-          "events": [{"source": "scope", "type": "mousedown"}],
-          "update": "{x: x(unit), y: y(unit), extent_x: domain(\"x\"), extent_y: domain(\"y\")}"
-        }
-      ]
-    },
-    {
-      "name": "selector009_translate_delta",
-      "value": {},
+      "name": "selector122_Country_legend",
+      "value": null,
       "on": [
         {
           "events": [
             {
-              "source": "window",
-              "type": "mousemove",
-              "consume": true,
-              "between": [
-                {"source": "scope", "type": "mousedown"},
-                {"source": "window", "type": "mouseup"}
+              "source": "view",
+              "type": "click",
+              "markname": "Country_legend_symbols"
+            },
+            {
+              "source": "view",
+              "type": "click",
+              "markname": "Country_legend_labels"
+            },
+            {
+              "source": "view",
+              "type": "click",
+              "markname": "Country_legend_entries"
+            }
+          ],
+          "update": "datum.value || item().items[0].items[0].datum.value",
+          "force": true
+        },
+        {
+          "events": [{"source": "view", "type": "click"}],
+          "update": "!event.item || !datum ? null : selector122_Country_legend",
+          "force": true
+        }
+      ]
+    },
+    {
+      "name": "selector122",
+      "update": "vlSelectionResolve(\"selector122_store\", \"union\", true)"
+    },
+    {
+      "name": "selector123",
+      "update": "{\"Deaths\": selector123_Deaths, \"Recovered\": selector123_Recovered, \"Active\": selector123_Active, \"Date\": selector123_Date, \"Confirmed\": selector123_Confirmed}"
+    },
+    {"name": "selector123_Deaths"},
+    {"name": "selector123_Recovered"},
+    {"name": "selector123_Active"},
+    {"name": "selector123_Date"},
+    {"name": "selector123_Confirmed"}
+  ],
+  "layout": {"padding": 20, "columns": 1, "bounds": "full", "align": "each"},
+  "marks": [
+    {
+      "type": "group",
+      "name": "concat_0_group",
+      "layout": {"padding": 20, "bounds": "full", "align": "each"},
+      "marks": [
+        {
+          "type": "group",
+          "name": "concat_0_concat_0_group",
+          "title": {"text": "Recovered vs. Deaths", "frame": "group"},
+          "style": "cell",
+          "encode": {
+            "update": {
+              "width": {"signal": "concat_0_concat_0_width"},
+              "height": {"signal": "concat_0_height"}
+            }
+          },
+          "signals": [
+            {
+              "name": "selector122_tuple",
+              "update": "selector122_Country_legend !== null ? {fields: selector122_tuple_fields, values: [selector122_Country_legend]} : null"
+            },
+            {
+              "name": "selector122_tuple_fields",
+              "value": [{"type": "E", "field": "Country"}]
+            },
+            {
+              "name": "selector122_toggle",
+              "value": false,
+              "on": [
+                {
+                  "events": {"merge": [{"source": "view", "type": "click"}]},
+                  "update": "event.shiftKey"
+                }
+              ]
+            },
+            {
+              "name": "selector122_modify",
+              "on": [
+                {
+                  "events": {"signal": "selector122_tuple"},
+                  "update": "modify(\"selector122_store\", selector122_toggle ? null : selector122_tuple, selector122_toggle ? null : true, selector122_toggle ? selector122_tuple : null)"
+                }
+              ]
+            },
+            {
+              "name": "selector123_Deaths",
+              "on": [
+                {
+                  "events": {"signal": "selector123_translate_delta"},
+                  "update": "panLinear(selector123_translate_anchor.extent_x, -selector123_translate_delta.x / concat_0_concat_0_width)"
+                },
+                {
+                  "events": {"signal": "selector123_zoom_delta"},
+                  "update": "zoomLinear(domain(\"concat_0_concat_0_x\"), selector123_zoom_anchor.x, selector123_zoom_delta)"
+                },
+                {
+                  "events": [{"source": "scope", "type": "dblclick"}],
+                  "update": "null"
+                }
+              ],
+              "push": "outer"
+            },
+            {
+              "name": "selector123_Recovered",
+              "on": [
+                {
+                  "events": {"signal": "selector123_translate_delta"},
+                  "update": "panLinear(selector123_translate_anchor.extent_y, selector123_translate_delta.y / concat_0_height)"
+                },
+                {
+                  "events": {"signal": "selector123_zoom_delta"},
+                  "update": "zoomLinear(domain(\"concat_0_concat_0_y\"), selector123_zoom_anchor.y, selector123_zoom_delta)"
+                },
+                {
+                  "events": [{"source": "scope", "type": "dblclick"}],
+                  "update": "null"
+                }
+              ],
+              "push": "outer"
+            },
+            {
+              "name": "selector123_tuple",
+              "on": [
+                {
+                  "events": [
+                    {"signal": "selector123_Deaths || selector123_Recovered"}
+                  ],
+                  "update": "selector123_Deaths && selector123_Recovered ? {unit: \"concat_0_concat_0\", fields: selector123_tuple_fields, values: [selector123_Deaths,selector123_Recovered]} : null"
+                }
+              ]
+            },
+            {
+              "name": "selector123_tuple_fields",
+              "value": [
+                {"field": "Deaths", "channel": "x", "type": "R"},
+                {"field": "Recovered", "channel": "y", "type": "R"}
+              ]
+            },
+            {
+              "name": "selector123_translate_anchor",
+              "value": {},
+              "on": [
+                {
+                  "events": [{"source": "scope", "type": "mousedown"}],
+                  "update": "{x: x(unit), y: y(unit), extent_x: domain(\"concat_0_concat_0_x\"), extent_y: domain(\"concat_0_concat_0_y\")}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_translate_delta",
+              "value": {},
+              "on": [
+                {
+                  "events": [
+                    {
+                      "source": "window",
+                      "type": "mousemove",
+                      "consume": true,
+                      "between": [
+                        {"source": "scope", "type": "mousedown"},
+                        {"source": "window", "type": "mouseup"}
+                      ]
+                    }
+                  ],
+                  "update": "{x: selector123_translate_anchor.x - x(unit), y: selector123_translate_anchor.y - y(unit)}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_zoom_anchor",
+              "on": [
+                {
+                  "events": [
+                    {"source": "scope", "type": "wheel", "consume": true}
+                  ],
+                  "update": "{x: invert(\"concat_0_concat_0_x\", x(unit)), y: invert(\"concat_0_concat_0_y\", y(unit))}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_zoom_delta",
+              "on": [
+                {
+                  "events": [
+                    {"source": "scope", "type": "wheel", "consume": true}
+                  ],
+                  "force": true,
+                  "update": "pow(1.001, event.deltaY * pow(16, event.deltaMode))"
+                }
+              ]
+            },
+            {
+              "name": "selector123_modify",
+              "on": [
+                {
+                  "events": {"signal": "selector123_tuple"},
+                  "update": "modify(\"selector123_store\", selector123_tuple, true)"
+                }
               ]
             }
           ],
-          "update": "{x: selector009_translate_anchor.x - x(unit), y: selector009_translate_anchor.y - y(unit)}"
-        }
-      ]
-    },
-    {
-      "name": "selector009_zoom_anchor",
-      "on": [
+          "marks": [
+            {
+              "name": "concat_0_concat_0_pathgroup",
+              "type": "group",
+              "from": {
+                "facet": {
+                  "name": "faceted_path_concat_0_concat_0_main",
+                  "data": "data_0",
+                  "groupby": ["Country"]
+                }
+              },
+              "encode": {
+                "update": {
+                  "width": {"field": {"group": "width"}},
+                  "height": {"field": {"group": "height"}}
+                }
+              },
+              "marks": [
+                {
+                  "name": "concat_0_concat_0_marks",
+                  "type": "line",
+                  "clip": true,
+                  "style": ["line"],
+                  "sort": {"field": "datum[\"Deaths\"]"},
+                  "interactive": true,
+                  "from": {"data": "faceted_path_concat_0_concat_0_main"},
+                  "encode": {
+                    "update": {
+                      "stroke": {"scale": "color", "field": "Country"},
+                      "opacity": [
+                        {
+                          "test": "!(length(data(\"selector122_store\"))) || (vlSelectionTest(\"selector122_store\", datum))",
+                          "value": 1
+                        },
+                        {"value": 0.2}
+                      ],
+                      "tooltip": {
+                        "signal": "{\"Date\": timeFormat(datum[\"Date\"], '%b %d, %Y'), \"Country\": ''+datum[\"Country\"], \"Active\": format(datum[\"Active\"], \"\"), \"Recovered\": format(datum[\"Recovered\"], \"\"), \"Deaths\": format(datum[\"Deaths\"], \"\")}"
+                      },
+                      "x": {"scale": "concat_0_concat_0_x", "field": "Deaths"},
+                      "y": {
+                        "scale": "concat_0_concat_0_y",
+                        "field": "Recovered"
+                      },
+                      "defined": {
+                        "signal": "isValid(datum[\"Deaths\"]) && isFinite(+datum[\"Deaths\"]) && isValid(datum[\"Recovered\"]) && isFinite(+datum[\"Recovered\"])"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "axes": [
+            {
+              "scale": "concat_0_concat_0_x",
+              "orient": "bottom",
+              "grid": false,
+              "title": "Deaths",
+              "labelFlush": true,
+              "labelOverlap": true,
+              "tickCount": {"signal": "ceil(concat_0_concat_0_width/40)"},
+              "zindex": 0
+            },
+            {
+              "scale": "concat_0_concat_0_y",
+              "orient": "left",
+              "grid": false,
+              "title": "Recovered",
+              "labelOverlap": true,
+              "tickCount": {"signal": "ceil(concat_0_height/40)"},
+              "zindex": 0
+            }
+          ]
+        },
         {
-          "events": [{"source": "scope", "type": "wheel", "consume": true}],
-          "update": "{x: invert(\"x\", x(unit)), y: invert(\"y\", y(unit))}"
-        }
-      ]
-    },
-    {
-      "name": "selector009_zoom_delta",
-      "on": [
-        {
-          "events": [{"source": "scope", "type": "wheel", "consume": true}],
-          "force": true,
-          "update": "pow(1.001, event.deltaY * pow(16, event.deltaMode))"
-        }
-      ]
-    },
-    {
-      "name": "selector009_modify",
-      "on": [
-        {
-          "events": {"signal": "selector009_tuple"},
-          "update": "modify(\"selector009_store\", selector009_tuple, true)"
-        }
-      ]
-    }
-  ],
-  "marks": [
-    {
-      "name": "pathgroup",
-      "type": "group",
-      "from": {
-        "facet": {
-          "name": "faceted_path_main",
-          "data": "data_0",
-          "groupby": ["Type"]
-        }
-      },
-      "encode": {
-        "update": {
-          "width": {"field": {"group": "width"}},
-          "height": {"field": {"group": "height"}}
-        }
-      },
-      "marks": [
-        {
-          "name": "marks",
-          "type": "line",
-          "clip": true,
-          "style": ["line"],
-          "sort": {"field": "datum[\"Date\"]"},
-          "interactive": true,
-          "from": {"data": "faceted_path_main"},
+          "type": "group",
+          "name": "concat_0_concat_1_group",
+          "title": {"text": "Active vs. Deaths", "frame": "group"},
+          "style": "cell",
           "encode": {
             "update": {
-              "stroke": {"scale": "color", "field": "Type"},
-              "opacity": {"value": 0.7},
-              "x": {"scale": "x", "field": "Date"},
-              "y": {"scale": "y", "field": "Count"},
-              "defined": {
-                "signal": "isValid(datum[\"Date\"]) && isFinite(+datum[\"Date\"]) && isValid(datum[\"Count\"]) && isFinite(+datum[\"Count\"])"
-              }
+              "width": {"signal": "concat_0_concat_1_width"},
+              "height": {"signal": "concat_0_height"}
             }
-          }
+          },
+          "signals": [
+            {
+              "name": "selector122_tuple",
+              "update": "selector122_Country_legend !== null ? {fields: selector122_tuple_fields, values: [selector122_Country_legend]} : null"
+            },
+            {
+              "name": "selector122_tuple_fields",
+              "value": [{"type": "E", "field": "Country"}]
+            },
+            {
+              "name": "selector122_toggle",
+              "value": false,
+              "on": [
+                {
+                  "events": {"merge": [{"source": "view", "type": "click"}]},
+                  "update": "event.shiftKey"
+                }
+              ]
+            },
+            {
+              "name": "selector122_modify",
+              "on": [
+                {
+                  "events": {"signal": "selector122_tuple"},
+                  "update": "modify(\"selector122_store\", selector122_toggle ? null : selector122_tuple, selector122_toggle ? null : true, selector122_toggle ? selector122_tuple : null)"
+                }
+              ]
+            },
+            {
+              "name": "selector123_Deaths",
+              "on": [
+                {
+                  "events": {"signal": "selector123_translate_delta"},
+                  "update": "panLinear(selector123_translate_anchor.extent_x, -selector123_translate_delta.x / concat_0_concat_1_width)"
+                },
+                {
+                  "events": {"signal": "selector123_zoom_delta"},
+                  "update": "zoomLinear(domain(\"concat_0_concat_1_x\"), selector123_zoom_anchor.x, selector123_zoom_delta)"
+                },
+                {
+                  "events": [{"source": "scope", "type": "dblclick"}],
+                  "update": "null"
+                }
+              ],
+              "push": "outer"
+            },
+            {
+              "name": "selector123_Active",
+              "on": [
+                {
+                  "events": {"signal": "selector123_translate_delta"},
+                  "update": "panLinear(selector123_translate_anchor.extent_y, selector123_translate_delta.y / concat_0_height)"
+                },
+                {
+                  "events": {"signal": "selector123_zoom_delta"},
+                  "update": "zoomLinear(domain(\"concat_0_concat_1_y\"), selector123_zoom_anchor.y, selector123_zoom_delta)"
+                },
+                {
+                  "events": [{"source": "scope", "type": "dblclick"}],
+                  "update": "null"
+                }
+              ],
+              "push": "outer"
+            },
+            {
+              "name": "selector123_tuple",
+              "on": [
+                {
+                  "events": [
+                    {"signal": "selector123_Deaths || selector123_Active"}
+                  ],
+                  "update": "selector123_Deaths && selector123_Active ? {unit: \"concat_0_concat_1\", fields: selector123_tuple_fields, values: [selector123_Deaths,selector123_Active]} : null"
+                }
+              ]
+            },
+            {
+              "name": "selector123_tuple_fields",
+              "value": [
+                {"field": "Deaths", "channel": "x", "type": "R"},
+                {"field": "Active", "channel": "y", "type": "R"}
+              ]
+            },
+            {
+              "name": "selector123_translate_anchor",
+              "value": {},
+              "on": [
+                {
+                  "events": [{"source": "scope", "type": "mousedown"}],
+                  "update": "{x: x(unit), y: y(unit), extent_x: domain(\"concat_0_concat_1_x\"), extent_y: domain(\"concat_0_concat_1_y\")}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_translate_delta",
+              "value": {},
+              "on": [
+                {
+                  "events": [
+                    {
+                      "source": "window",
+                      "type": "mousemove",
+                      "consume": true,
+                      "between": [
+                        {"source": "scope", "type": "mousedown"},
+                        {"source": "window", "type": "mouseup"}
+                      ]
+                    }
+                  ],
+                  "update": "{x: selector123_translate_anchor.x - x(unit), y: selector123_translate_anchor.y - y(unit)}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_zoom_anchor",
+              "on": [
+                {
+                  "events": [
+                    {"source": "scope", "type": "wheel", "consume": true}
+                  ],
+                  "update": "{x: invert(\"concat_0_concat_1_x\", x(unit)), y: invert(\"concat_0_concat_1_y\", y(unit))}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_zoom_delta",
+              "on": [
+                {
+                  "events": [
+                    {"source": "scope", "type": "wheel", "consume": true}
+                  ],
+                  "force": true,
+                  "update": "pow(1.001, event.deltaY * pow(16, event.deltaMode))"
+                }
+              ]
+            },
+            {
+              "name": "selector123_modify",
+              "on": [
+                {
+                  "events": {"signal": "selector123_tuple"},
+                  "update": "modify(\"selector123_store\", selector123_tuple, true)"
+                }
+              ]
+            }
+          ],
+          "marks": [
+            {
+              "name": "concat_0_concat_1_pathgroup",
+              "type": "group",
+              "from": {
+                "facet": {
+                  "name": "faceted_path_concat_0_concat_1_main",
+                  "data": "data_0",
+                  "groupby": ["Country"]
+                }
+              },
+              "encode": {
+                "update": {
+                  "width": {"field": {"group": "width"}},
+                  "height": {"field": {"group": "height"}}
+                }
+              },
+              "marks": [
+                {
+                  "name": "concat_0_concat_1_marks",
+                  "type": "line",
+                  "clip": true,
+                  "style": ["line"],
+                  "sort": {"field": "datum[\"Deaths\"]"},
+                  "interactive": true,
+                  "from": {"data": "faceted_path_concat_0_concat_1_main"},
+                  "encode": {
+                    "update": {
+                      "stroke": {"scale": "color", "field": "Country"},
+                      "opacity": [
+                        {
+                          "test": "!(length(data(\"selector122_store\"))) || (vlSelectionTest(\"selector122_store\", datum))",
+                          "value": 1
+                        },
+                        {"value": 0.2}
+                      ],
+                      "tooltip": {
+                        "signal": "{\"Date\": timeFormat(datum[\"Date\"], '%b %d, %Y'), \"Country\": ''+datum[\"Country\"], \"Active\": format(datum[\"Active\"], \"\"), \"Recovered\": format(datum[\"Recovered\"], \"\"), \"Deaths\": format(datum[\"Deaths\"], \"\")}"
+                      },
+                      "x": {"scale": "concat_0_concat_1_x", "field": "Deaths"},
+                      "y": {"scale": "concat_0_concat_1_y", "field": "Active"},
+                      "defined": {
+                        "signal": "isValid(datum[\"Deaths\"]) && isFinite(+datum[\"Deaths\"]) && isValid(datum[\"Active\"]) && isFinite(+datum[\"Active\"])"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "axes": [
+            {
+              "scale": "concat_0_concat_1_x",
+              "orient": "bottom",
+              "grid": false,
+              "title": "Deaths",
+              "labelFlush": true,
+              "labelOverlap": true,
+              "tickCount": {"signal": "ceil(concat_0_concat_1_width/40)"},
+              "zindex": 0
+            },
+            {
+              "scale": "concat_0_concat_1_y",
+              "orient": "left",
+              "grid": false,
+              "title": "Active",
+              "labelOverlap": true,
+              "tickCount": {"signal": "ceil(concat_0_height/40)"},
+              "zindex": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "name": "concat_1_group",
+      "layout": {"padding": 20, "bounds": "full", "align": "each"},
+      "marks": [
+        {
+          "type": "group",
+          "name": "concat_1_concat_0_group",
+          "title": {"text": "Confirmed", "frame": "group"},
+          "style": "cell",
+          "encode": {
+            "update": {
+              "width": {"signal": "concat_1_concat_0_width"},
+              "height": {"signal": "concat_1_height"}
+            }
+          },
+          "signals": [
+            {
+              "name": "selector122_tuple",
+              "update": "selector122_Country_legend !== null ? {fields: selector122_tuple_fields, values: [selector122_Country_legend]} : null"
+            },
+            {
+              "name": "selector122_tuple_fields",
+              "value": [{"type": "E", "field": "Country"}]
+            },
+            {
+              "name": "selector122_toggle",
+              "value": false,
+              "on": [
+                {
+                  "events": {"merge": [{"source": "view", "type": "click"}]},
+                  "update": "event.shiftKey"
+                }
+              ]
+            },
+            {
+              "name": "selector122_modify",
+              "on": [
+                {
+                  "events": {"signal": "selector122_tuple"},
+                  "update": "modify(\"selector122_store\", selector122_toggle ? null : selector122_tuple, selector122_toggle ? null : true, selector122_toggle ? selector122_tuple : null)"
+                }
+              ]
+            },
+            {
+              "name": "selector123_Date",
+              "on": [
+                {
+                  "events": {"signal": "selector123_translate_delta"},
+                  "update": "panLinear(selector123_translate_anchor.extent_x, -selector123_translate_delta.x / concat_1_concat_0_width)"
+                },
+                {
+                  "events": {"signal": "selector123_zoom_delta"},
+                  "update": "zoomLinear(domain(\"concat_1_concat_0_x\"), selector123_zoom_anchor.x, selector123_zoom_delta)"
+                },
+                {
+                  "events": [{"source": "scope", "type": "dblclick"}],
+                  "update": "null"
+                }
+              ],
+              "push": "outer"
+            },
+            {
+              "name": "selector123_Confirmed",
+              "on": [
+                {
+                  "events": {"signal": "selector123_translate_delta"},
+                  "update": "panLinear(selector123_translate_anchor.extent_y, selector123_translate_delta.y / concat_1_height)"
+                },
+                {
+                  "events": {"signal": "selector123_zoom_delta"},
+                  "update": "zoomLinear(domain(\"concat_1_concat_0_y\"), selector123_zoom_anchor.y, selector123_zoom_delta)"
+                },
+                {
+                  "events": [{"source": "scope", "type": "dblclick"}],
+                  "update": "null"
+                }
+              ],
+              "push": "outer"
+            },
+            {
+              "name": "selector123_tuple",
+              "on": [
+                {
+                  "events": [
+                    {"signal": "selector123_Date || selector123_Confirmed"}
+                  ],
+                  "update": "selector123_Date && selector123_Confirmed ? {unit: \"concat_1_concat_0\", fields: selector123_tuple_fields, values: [selector123_Date,selector123_Confirmed]} : null"
+                }
+              ]
+            },
+            {
+              "name": "selector123_tuple_fields",
+              "value": [
+                {"field": "Date", "channel": "x", "type": "R"},
+                {"field": "Confirmed", "channel": "y", "type": "R"}
+              ]
+            },
+            {
+              "name": "selector123_translate_anchor",
+              "value": {},
+              "on": [
+                {
+                  "events": [{"source": "scope", "type": "mousedown"}],
+                  "update": "{x: x(unit), y: y(unit), extent_x: domain(\"concat_1_concat_0_x\"), extent_y: domain(\"concat_1_concat_0_y\")}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_translate_delta",
+              "value": {},
+              "on": [
+                {
+                  "events": [
+                    {
+                      "source": "window",
+                      "type": "mousemove",
+                      "consume": true,
+                      "between": [
+                        {"source": "scope", "type": "mousedown"},
+                        {"source": "window", "type": "mouseup"}
+                      ]
+                    }
+                  ],
+                  "update": "{x: selector123_translate_anchor.x - x(unit), y: selector123_translate_anchor.y - y(unit)}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_zoom_anchor",
+              "on": [
+                {
+                  "events": [
+                    {"source": "scope", "type": "wheel", "consume": true}
+                  ],
+                  "update": "{x: invert(\"concat_1_concat_0_x\", x(unit)), y: invert(\"concat_1_concat_0_y\", y(unit))}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_zoom_delta",
+              "on": [
+                {
+                  "events": [
+                    {"source": "scope", "type": "wheel", "consume": true}
+                  ],
+                  "force": true,
+                  "update": "pow(1.001, event.deltaY * pow(16, event.deltaMode))"
+                }
+              ]
+            },
+            {
+              "name": "selector123_modify",
+              "on": [
+                {
+                  "events": {"signal": "selector123_tuple"},
+                  "update": "modify(\"selector123_store\", selector123_tuple, true)"
+                }
+              ]
+            }
+          ],
+          "marks": [
+            {
+              "name": "concat_1_concat_0_pathgroup",
+              "type": "group",
+              "from": {
+                "facet": {
+                  "name": "faceted_path_concat_1_concat_0_main",
+                  "data": "data_0",
+                  "groupby": ["Country"]
+                }
+              },
+              "encode": {
+                "update": {
+                  "width": {"field": {"group": "width"}},
+                  "height": {"field": {"group": "height"}}
+                }
+              },
+              "marks": [
+                {
+                  "name": "concat_1_concat_0_marks",
+                  "type": "line",
+                  "clip": true,
+                  "style": ["line"],
+                  "sort": {"field": "datum[\"Date\"]"},
+                  "interactive": true,
+                  "from": {"data": "faceted_path_concat_1_concat_0_main"},
+                  "encode": {
+                    "update": {
+                      "stroke": {"scale": "color", "field": "Country"},
+                      "opacity": [
+                        {
+                          "test": "!(length(data(\"selector122_store\"))) || (vlSelectionTest(\"selector122_store\", datum))",
+                          "value": 1
+                        },
+                        {"value": 0}
+                      ],
+                      "tooltip": {
+                        "signal": "{\"Date\": timeFormat(datum[\"Date\"], '%b %d, %Y'), \"Country\": ''+datum[\"Country\"], \"Active\": format(datum[\"Active\"], \"\"), \"Recovered\": format(datum[\"Recovered\"], \"\"), \"Deaths\": format(datum[\"Deaths\"], \"\")}"
+                      },
+                      "x": {"scale": "concat_1_concat_0_x", "field": "Date"},
+                      "y": {
+                        "scale": "concat_1_concat_0_y",
+                        "field": "Confirmed"
+                      },
+                      "defined": {
+                        "signal": "isValid(datum[\"Date\"]) && isFinite(+datum[\"Date\"]) && isValid(datum[\"Confirmed\"]) && isFinite(+datum[\"Confirmed\"])"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "axes": [
+            {
+              "scale": "concat_1_concat_0_x",
+              "orient": "bottom",
+              "grid": false,
+              "labelFlush": true,
+              "labelOverlap": true,
+              "tickCount": {"signal": "ceil(concat_1_concat_0_width/40)"},
+              "zindex": 0
+            },
+            {
+              "scale": "concat_1_concat_0_y",
+              "orient": "left",
+              "grid": false,
+              "labelOverlap": true,
+              "tickCount": {"signal": "ceil(concat_1_height/40)"},
+              "zindex": 0
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "name": "concat_1_concat_1_group",
+          "title": {"text": "Active", "frame": "group"},
+          "style": "cell",
+          "encode": {
+            "update": {
+              "width": {"signal": "concat_1_concat_1_width"},
+              "height": {"signal": "concat_1_height"}
+            }
+          },
+          "signals": [
+            {
+              "name": "selector122_tuple",
+              "update": "selector122_Country_legend !== null ? {fields: selector122_tuple_fields, values: [selector122_Country_legend]} : null"
+            },
+            {
+              "name": "selector122_tuple_fields",
+              "value": [{"type": "E", "field": "Country"}]
+            },
+            {
+              "name": "selector122_toggle",
+              "value": false,
+              "on": [
+                {
+                  "events": {"merge": [{"source": "view", "type": "click"}]},
+                  "update": "event.shiftKey"
+                }
+              ]
+            },
+            {
+              "name": "selector122_modify",
+              "on": [
+                {
+                  "events": {"signal": "selector122_tuple"},
+                  "update": "modify(\"selector122_store\", selector122_toggle ? null : selector122_tuple, selector122_toggle ? null : true, selector122_toggle ? selector122_tuple : null)"
+                }
+              ]
+            },
+            {
+              "name": "selector123_Date",
+              "on": [
+                {
+                  "events": {"signal": "selector123_translate_delta"},
+                  "update": "panLinear(selector123_translate_anchor.extent_x, -selector123_translate_delta.x / concat_1_concat_1_width)"
+                },
+                {
+                  "events": {"signal": "selector123_zoom_delta"},
+                  "update": "zoomLinear(domain(\"concat_1_concat_1_x\"), selector123_zoom_anchor.x, selector123_zoom_delta)"
+                },
+                {
+                  "events": [{"source": "scope", "type": "dblclick"}],
+                  "update": "null"
+                }
+              ],
+              "push": "outer"
+            },
+            {
+              "name": "selector123_Active",
+              "on": [
+                {
+                  "events": {"signal": "selector123_translate_delta"},
+                  "update": "panLinear(selector123_translate_anchor.extent_y, selector123_translate_delta.y / concat_1_height)"
+                },
+                {
+                  "events": {"signal": "selector123_zoom_delta"},
+                  "update": "zoomLinear(domain(\"concat_1_concat_1_y\"), selector123_zoom_anchor.y, selector123_zoom_delta)"
+                },
+                {
+                  "events": [{"source": "scope", "type": "dblclick"}],
+                  "update": "null"
+                }
+              ],
+              "push": "outer"
+            },
+            {
+              "name": "selector123_tuple",
+              "on": [
+                {
+                  "events": [
+                    {"signal": "selector123_Date || selector123_Active"}
+                  ],
+                  "update": "selector123_Date && selector123_Active ? {unit: \"concat_1_concat_1\", fields: selector123_tuple_fields, values: [selector123_Date,selector123_Active]} : null"
+                }
+              ]
+            },
+            {
+              "name": "selector123_tuple_fields",
+              "value": [
+                {"field": "Date", "channel": "x", "type": "R"},
+                {"field": "Active", "channel": "y", "type": "R"}
+              ]
+            },
+            {
+              "name": "selector123_translate_anchor",
+              "value": {},
+              "on": [
+                {
+                  "events": [{"source": "scope", "type": "mousedown"}],
+                  "update": "{x: x(unit), y: y(unit), extent_x: domain(\"concat_1_concat_1_x\"), extent_y: domain(\"concat_1_concat_1_y\")}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_translate_delta",
+              "value": {},
+              "on": [
+                {
+                  "events": [
+                    {
+                      "source": "window",
+                      "type": "mousemove",
+                      "consume": true,
+                      "between": [
+                        {"source": "scope", "type": "mousedown"},
+                        {"source": "window", "type": "mouseup"}
+                      ]
+                    }
+                  ],
+                  "update": "{x: selector123_translate_anchor.x - x(unit), y: selector123_translate_anchor.y - y(unit)}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_zoom_anchor",
+              "on": [
+                {
+                  "events": [
+                    {"source": "scope", "type": "wheel", "consume": true}
+                  ],
+                  "update": "{x: invert(\"concat_1_concat_1_x\", x(unit)), y: invert(\"concat_1_concat_1_y\", y(unit))}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_zoom_delta",
+              "on": [
+                {
+                  "events": [
+                    {"source": "scope", "type": "wheel", "consume": true}
+                  ],
+                  "force": true,
+                  "update": "pow(1.001, event.deltaY * pow(16, event.deltaMode))"
+                }
+              ]
+            },
+            {
+              "name": "selector123_modify",
+              "on": [
+                {
+                  "events": {"signal": "selector123_tuple"},
+                  "update": "modify(\"selector123_store\", selector123_tuple, true)"
+                }
+              ]
+            }
+          ],
+          "marks": [
+            {
+              "name": "concat_1_concat_1_pathgroup",
+              "type": "group",
+              "from": {
+                "facet": {
+                  "name": "faceted_path_concat_1_concat_1_main",
+                  "data": "data_0",
+                  "groupby": ["Country"]
+                }
+              },
+              "encode": {
+                "update": {
+                  "width": {"field": {"group": "width"}},
+                  "height": {"field": {"group": "height"}}
+                }
+              },
+              "marks": [
+                {
+                  "name": "concat_1_concat_1_marks",
+                  "type": "line",
+                  "clip": true,
+                  "style": ["line"],
+                  "sort": {"field": "datum[\"Date\"]"},
+                  "interactive": true,
+                  "from": {"data": "faceted_path_concat_1_concat_1_main"},
+                  "encode": {
+                    "update": {
+                      "stroke": {"scale": "color", "field": "Country"},
+                      "opacity": [
+                        {
+                          "test": "!(length(data(\"selector122_store\"))) || (vlSelectionTest(\"selector122_store\", datum))",
+                          "value": 1
+                        },
+                        {"value": 0}
+                      ],
+                      "tooltip": {
+                        "signal": "{\"Date\": timeFormat(datum[\"Date\"], '%b %d, %Y'), \"Country\": ''+datum[\"Country\"], \"Active\": format(datum[\"Active\"], \"\"), \"Recovered\": format(datum[\"Recovered\"], \"\"), \"Deaths\": format(datum[\"Deaths\"], \"\")}"
+                      },
+                      "x": {"scale": "concat_1_concat_1_x", "field": "Date"},
+                      "y": {"scale": "concat_1_concat_1_y", "field": "Active"},
+                      "defined": {
+                        "signal": "isValid(datum[\"Date\"]) && isFinite(+datum[\"Date\"]) && isValid(datum[\"Active\"]) && isFinite(+datum[\"Active\"])"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "axes": [
+            {
+              "scale": "concat_1_concat_1_x",
+              "orient": "bottom",
+              "grid": false,
+              "labelFlush": true,
+              "labelOverlap": true,
+              "tickCount": {"signal": "ceil(concat_1_concat_1_width/40)"},
+              "zindex": 0
+            },
+            {
+              "scale": "concat_1_concat_1_y",
+              "orient": "left",
+              "grid": false,
+              "labelOverlap": true,
+              "tickCount": {"signal": "ceil(concat_1_height/40)"},
+              "zindex": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "name": "concat_2_group",
+      "layout": {"padding": 20, "bounds": "full", "align": "each"},
+      "marks": [
+        {
+          "type": "group",
+          "name": "concat_2_concat_0_group",
+          "title": {"text": "Deaths", "frame": "group"},
+          "style": "cell",
+          "encode": {
+            "update": {
+              "width": {"signal": "concat_2_concat_0_width"},
+              "height": {"signal": "concat_2_height"}
+            }
+          },
+          "signals": [
+            {
+              "name": "selector122_tuple",
+              "update": "selector122_Country_legend !== null ? {fields: selector122_tuple_fields, values: [selector122_Country_legend]} : null"
+            },
+            {
+              "name": "selector122_tuple_fields",
+              "value": [{"type": "E", "field": "Country"}]
+            },
+            {
+              "name": "selector122_toggle",
+              "value": false,
+              "on": [
+                {
+                  "events": {"merge": [{"source": "view", "type": "click"}]},
+                  "update": "event.shiftKey"
+                }
+              ]
+            },
+            {
+              "name": "selector122_modify",
+              "on": [
+                {
+                  "events": {"signal": "selector122_tuple"},
+                  "update": "modify(\"selector122_store\", selector122_toggle ? null : selector122_tuple, selector122_toggle ? null : true, selector122_toggle ? selector122_tuple : null)"
+                }
+              ]
+            },
+            {
+              "name": "selector123_Date",
+              "on": [
+                {
+                  "events": {"signal": "selector123_translate_delta"},
+                  "update": "panLinear(selector123_translate_anchor.extent_x, -selector123_translate_delta.x / concat_2_concat_0_width)"
+                },
+                {
+                  "events": {"signal": "selector123_zoom_delta"},
+                  "update": "zoomLinear(domain(\"concat_2_concat_0_x\"), selector123_zoom_anchor.x, selector123_zoom_delta)"
+                },
+                {
+                  "events": [{"source": "scope", "type": "dblclick"}],
+                  "update": "null"
+                }
+              ],
+              "push": "outer"
+            },
+            {
+              "name": "selector123_Deaths",
+              "on": [
+                {
+                  "events": {"signal": "selector123_translate_delta"},
+                  "update": "panLinear(selector123_translate_anchor.extent_y, selector123_translate_delta.y / concat_2_height)"
+                },
+                {
+                  "events": {"signal": "selector123_zoom_delta"},
+                  "update": "zoomLinear(domain(\"concat_2_concat_0_y\"), selector123_zoom_anchor.y, selector123_zoom_delta)"
+                },
+                {
+                  "events": [{"source": "scope", "type": "dblclick"}],
+                  "update": "null"
+                }
+              ],
+              "push": "outer"
+            },
+            {
+              "name": "selector123_tuple",
+              "on": [
+                {
+                  "events": [
+                    {"signal": "selector123_Date || selector123_Deaths"}
+                  ],
+                  "update": "selector123_Date && selector123_Deaths ? {unit: \"concat_2_concat_0\", fields: selector123_tuple_fields, values: [selector123_Date,selector123_Deaths]} : null"
+                }
+              ]
+            },
+            {
+              "name": "selector123_tuple_fields",
+              "value": [
+                {"field": "Date", "channel": "x", "type": "R"},
+                {"field": "Deaths", "channel": "y", "type": "R"}
+              ]
+            },
+            {
+              "name": "selector123_translate_anchor",
+              "value": {},
+              "on": [
+                {
+                  "events": [{"source": "scope", "type": "mousedown"}],
+                  "update": "{x: x(unit), y: y(unit), extent_x: domain(\"concat_2_concat_0_x\"), extent_y: domain(\"concat_2_concat_0_y\")}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_translate_delta",
+              "value": {},
+              "on": [
+                {
+                  "events": [
+                    {
+                      "source": "window",
+                      "type": "mousemove",
+                      "consume": true,
+                      "between": [
+                        {"source": "scope", "type": "mousedown"},
+                        {"source": "window", "type": "mouseup"}
+                      ]
+                    }
+                  ],
+                  "update": "{x: selector123_translate_anchor.x - x(unit), y: selector123_translate_anchor.y - y(unit)}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_zoom_anchor",
+              "on": [
+                {
+                  "events": [
+                    {"source": "scope", "type": "wheel", "consume": true}
+                  ],
+                  "update": "{x: invert(\"concat_2_concat_0_x\", x(unit)), y: invert(\"concat_2_concat_0_y\", y(unit))}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_zoom_delta",
+              "on": [
+                {
+                  "events": [
+                    {"source": "scope", "type": "wheel", "consume": true}
+                  ],
+                  "force": true,
+                  "update": "pow(1.001, event.deltaY * pow(16, event.deltaMode))"
+                }
+              ]
+            },
+            {
+              "name": "selector123_modify",
+              "on": [
+                {
+                  "events": {"signal": "selector123_tuple"},
+                  "update": "modify(\"selector123_store\", selector123_tuple, true)"
+                }
+              ]
+            }
+          ],
+          "marks": [
+            {
+              "name": "concat_2_concat_0_pathgroup",
+              "type": "group",
+              "from": {
+                "facet": {
+                  "name": "faceted_path_concat_2_concat_0_main",
+                  "data": "data_0",
+                  "groupby": ["Country"]
+                }
+              },
+              "encode": {
+                "update": {
+                  "width": {"field": {"group": "width"}},
+                  "height": {"field": {"group": "height"}}
+                }
+              },
+              "marks": [
+                {
+                  "name": "concat_2_concat_0_marks",
+                  "type": "line",
+                  "clip": true,
+                  "style": ["line"],
+                  "sort": {"field": "datum[\"Date\"]"},
+                  "interactive": true,
+                  "from": {"data": "faceted_path_concat_2_concat_0_main"},
+                  "encode": {
+                    "update": {
+                      "stroke": {"scale": "color", "field": "Country"},
+                      "opacity": [
+                        {
+                          "test": "!(length(data(\"selector122_store\"))) || (vlSelectionTest(\"selector122_store\", datum))",
+                          "value": 1
+                        },
+                        {"value": 0.2}
+                      ],
+                      "tooltip": {
+                        "signal": "{\"Date\": timeFormat(datum[\"Date\"], '%b %d, %Y'), \"Country\": ''+datum[\"Country\"], \"Active\": format(datum[\"Active\"], \"\"), \"Recovered\": format(datum[\"Recovered\"], \"\"), \"Deaths\": format(datum[\"Deaths\"], \"\")}"
+                      },
+                      "x": {"scale": "concat_2_concat_0_x", "field": "Date"},
+                      "y": {"scale": "concat_2_concat_0_y", "field": "Deaths"},
+                      "defined": {
+                        "signal": "isValid(datum[\"Date\"]) && isFinite(+datum[\"Date\"]) && isValid(datum[\"Deaths\"]) && isFinite(+datum[\"Deaths\"])"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "axes": [
+            {
+              "scale": "concat_2_concat_0_x",
+              "orient": "bottom",
+              "grid": false,
+              "labelFlush": true,
+              "labelOverlap": true,
+              "tickCount": {"signal": "ceil(concat_2_concat_0_width/40)"},
+              "zindex": 0
+            },
+            {
+              "scale": "concat_2_concat_0_y",
+              "orient": "left",
+              "grid": false,
+              "labelOverlap": true,
+              "tickCount": {"signal": "ceil(concat_2_height/40)"},
+              "zindex": 0
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "name": "concat_2_concat_1_group",
+          "title": {"text": "Recovered", "frame": "group"},
+          "style": "cell",
+          "encode": {
+            "update": {
+              "width": {"signal": "concat_2_concat_1_width"},
+              "height": {"signal": "concat_2_height"}
+            }
+          },
+          "signals": [
+            {
+              "name": "selector122_tuple",
+              "update": "selector122_Country_legend !== null ? {fields: selector122_tuple_fields, values: [selector122_Country_legend]} : null"
+            },
+            {
+              "name": "selector122_tuple_fields",
+              "value": [{"type": "E", "field": "Country"}]
+            },
+            {
+              "name": "selector122_toggle",
+              "value": false,
+              "on": [
+                {
+                  "events": {"merge": [{"source": "view", "type": "click"}]},
+                  "update": "event.shiftKey"
+                }
+              ]
+            },
+            {
+              "name": "selector122_modify",
+              "on": [
+                {
+                  "events": {"signal": "selector122_tuple"},
+                  "update": "modify(\"selector122_store\", selector122_toggle ? null : selector122_tuple, selector122_toggle ? null : true, selector122_toggle ? selector122_tuple : null)"
+                }
+              ]
+            },
+            {
+              "name": "selector123_Date",
+              "on": [
+                {
+                  "events": {"signal": "selector123_translate_delta"},
+                  "update": "panLinear(selector123_translate_anchor.extent_x, -selector123_translate_delta.x / concat_2_concat_1_width)"
+                },
+                {
+                  "events": {"signal": "selector123_zoom_delta"},
+                  "update": "zoomLinear(domain(\"concat_2_concat_1_x\"), selector123_zoom_anchor.x, selector123_zoom_delta)"
+                },
+                {
+                  "events": [{"source": "scope", "type": "dblclick"}],
+                  "update": "null"
+                }
+              ],
+              "push": "outer"
+            },
+            {
+              "name": "selector123_Recovered",
+              "on": [
+                {
+                  "events": {"signal": "selector123_translate_delta"},
+                  "update": "panLinear(selector123_translate_anchor.extent_y, selector123_translate_delta.y / concat_2_height)"
+                },
+                {
+                  "events": {"signal": "selector123_zoom_delta"},
+                  "update": "zoomLinear(domain(\"concat_2_concat_1_y\"), selector123_zoom_anchor.y, selector123_zoom_delta)"
+                },
+                {
+                  "events": [{"source": "scope", "type": "dblclick"}],
+                  "update": "null"
+                }
+              ],
+              "push": "outer"
+            },
+            {
+              "name": "selector123_tuple",
+              "on": [
+                {
+                  "events": [
+                    {"signal": "selector123_Date || selector123_Recovered"}
+                  ],
+                  "update": "selector123_Date && selector123_Recovered ? {unit: \"concat_2_concat_1\", fields: selector123_tuple_fields, values: [selector123_Date,selector123_Recovered]} : null"
+                }
+              ]
+            },
+            {
+              "name": "selector123_tuple_fields",
+              "value": [
+                {"field": "Date", "channel": "x", "type": "R"},
+                {"field": "Recovered", "channel": "y", "type": "R"}
+              ]
+            },
+            {
+              "name": "selector123_translate_anchor",
+              "value": {},
+              "on": [
+                {
+                  "events": [{"source": "scope", "type": "mousedown"}],
+                  "update": "{x: x(unit), y: y(unit), extent_x: domain(\"concat_2_concat_1_x\"), extent_y: domain(\"concat_2_concat_1_y\")}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_translate_delta",
+              "value": {},
+              "on": [
+                {
+                  "events": [
+                    {
+                      "source": "window",
+                      "type": "mousemove",
+                      "consume": true,
+                      "between": [
+                        {"source": "scope", "type": "mousedown"},
+                        {"source": "window", "type": "mouseup"}
+                      ]
+                    }
+                  ],
+                  "update": "{x: selector123_translate_anchor.x - x(unit), y: selector123_translate_anchor.y - y(unit)}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_zoom_anchor",
+              "on": [
+                {
+                  "events": [
+                    {"source": "scope", "type": "wheel", "consume": true}
+                  ],
+                  "update": "{x: invert(\"concat_2_concat_1_x\", x(unit)), y: invert(\"concat_2_concat_1_y\", y(unit))}"
+                }
+              ]
+            },
+            {
+              "name": "selector123_zoom_delta",
+              "on": [
+                {
+                  "events": [
+                    {"source": "scope", "type": "wheel", "consume": true}
+                  ],
+                  "force": true,
+                  "update": "pow(1.001, event.deltaY * pow(16, event.deltaMode))"
+                }
+              ]
+            },
+            {
+              "name": "selector123_modify",
+              "on": [
+                {
+                  "events": {"signal": "selector123_tuple"},
+                  "update": "modify(\"selector123_store\", selector123_tuple, true)"
+                }
+              ]
+            }
+          ],
+          "marks": [
+            {
+              "name": "concat_2_concat_1_pathgroup",
+              "type": "group",
+              "from": {
+                "facet": {
+                  "name": "faceted_path_concat_2_concat_1_main",
+                  "data": "data_0",
+                  "groupby": ["Country"]
+                }
+              },
+              "encode": {
+                "update": {
+                  "width": {"field": {"group": "width"}},
+                  "height": {"field": {"group": "height"}}
+                }
+              },
+              "marks": [
+                {
+                  "name": "concat_2_concat_1_marks",
+                  "type": "line",
+                  "clip": true,
+                  "style": ["line"],
+                  "sort": {"field": "datum[\"Date\"]"},
+                  "interactive": true,
+                  "from": {"data": "faceted_path_concat_2_concat_1_main"},
+                  "encode": {
+                    "update": {
+                      "stroke": {"scale": "color", "field": "Country"},
+                      "opacity": [
+                        {
+                          "test": "!(length(data(\"selector122_store\"))) || (vlSelectionTest(\"selector122_store\", datum))",
+                          "value": 1
+                        },
+                        {"value": 0.2}
+                      ],
+                      "tooltip": {
+                        "signal": "{\"Date\": timeFormat(datum[\"Date\"], '%b %d, %Y'), \"Country\": ''+datum[\"Country\"], \"Active\": format(datum[\"Active\"], \"\"), \"Recovered\": format(datum[\"Recovered\"], \"\"), \"Deaths\": format(datum[\"Deaths\"], \"\")}"
+                      },
+                      "x": {"scale": "concat_2_concat_1_x", "field": "Date"},
+                      "y": {
+                        "scale": "concat_2_concat_1_y",
+                        "field": "Recovered"
+                      },
+                      "defined": {
+                        "signal": "isValid(datum[\"Date\"]) && isFinite(+datum[\"Date\"]) && isValid(datum[\"Recovered\"]) && isFinite(+datum[\"Recovered\"])"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "axes": [
+            {
+              "scale": "concat_2_concat_1_x",
+              "orient": "bottom",
+              "grid": false,
+              "labelFlush": true,
+              "labelOverlap": true,
+              "tickCount": {"signal": "ceil(concat_2_concat_1_width/40)"},
+              "zindex": 0
+            },
+            {
+              "scale": "concat_2_concat_1_y",
+              "orient": "left",
+              "grid": false,
+              "labelOverlap": true,
+              "tickCount": {"signal": "ceil(concat_2_height/40)"},
+              "zindex": 0
+            }
+          ]
         }
       ]
     }
   ],
   "scales": [
     {
-      "name": "x",
-      "type": "time",
-      "domain": {"data": "data_0", "field": "Date"},
-      "domainRaw": {"signal": "selector009[\"Date\"]"},
-      "range": [0, {"signal": "width"}]
+      "name": "color",
+      "type": "ordinal",
+      "domain": {"data": "data_0", "field": "Country", "sort": true},
+      "range": "category"
     },
     {
-      "name": "y",
+      "name": "concat_0_concat_0_x",
       "type": "linear",
-      "domain": {"data": "data_0", "field": "Count"},
-      "domainRaw": {"signal": "selector009[\"Count\"]"},
-      "range": [{"signal": "height"}, 0],
+      "domain": {"data": "data_0", "field": "Deaths"},
+      "domainRaw": {"signal": "selector123[\"Deaths\"]"},
+      "range": [0, {"signal": "concat_0_concat_0_width"}],
+      "nice": true,
+      "zero": false
+    },
+    {
+      "name": "concat_0_concat_0_y",
+      "type": "linear",
+      "domain": {"data": "data_0", "field": "Recovered"},
+      "domainRaw": {"signal": "selector123[\"Recovered\"]"},
+      "range": [{"signal": "concat_0_height"}, 0],
       "nice": true,
       "zero": true
     },
     {
-      "name": "color",
-      "type": "ordinal",
-      "domain": {"data": "data_0", "field": "Type", "sort": true},
-      "range": "category"
-    }
-  ],
-  "axes": [
-    {
-      "scale": "x",
-      "orient": "bottom",
-      "gridScale": "y",
-      "grid": true,
-      "tickCount": {"signal": "ceil(width/40)"},
-      "domain": false,
-      "labels": false,
-      "maxExtent": 0,
-      "minExtent": 0,
-      "ticks": false,
-      "zindex": 0
+      "name": "concat_0_concat_1_x",
+      "type": "linear",
+      "domain": {"data": "data_0", "field": "Deaths"},
+      "domainRaw": {"signal": "selector123[\"Deaths\"]"},
+      "range": [0, {"signal": "concat_0_concat_1_width"}],
+      "nice": true,
+      "zero": false
     },
     {
-      "scale": "y",
-      "orient": "left",
-      "gridScale": "x",
-      "grid": true,
-      "tickCount": {"signal": "ceil(height/40)"},
-      "domain": false,
-      "labels": false,
-      "maxExtent": 0,
-      "minExtent": 0,
-      "ticks": false,
-      "zindex": 0
+      "name": "concat_0_concat_1_y",
+      "type": "linear",
+      "domain": {"data": "data_0", "field": "Active"},
+      "domainRaw": {"signal": "selector123[\"Active\"]"},
+      "range": [{"signal": "concat_0_height"}, 0],
+      "nice": true,
+      "zero": true
     },
     {
-      "scale": "x",
-      "orient": "bottom",
-      "grid": false,
-      "title": "Date",
-      "labelFlush": true,
-      "labelOverlap": true,
-      "tickCount": {"signal": "ceil(width/40)"},
-      "zindex": 0
+      "name": "concat_1_concat_0_x",
+      "type": "time",
+      "domain": {"data": "data_0", "field": "Date"},
+      "domainRaw": {"signal": "selector123[\"Date\"]"},
+      "range": [0, {"signal": "concat_1_concat_0_width"}]
     },
     {
-      "scale": "y",
-      "orient": "left",
-      "grid": false,
-      "title": "Count",
-      "labelOverlap": true,
-      "tickCount": {"signal": "ceil(height/40)"},
-      "zindex": 0
+      "name": "concat_1_concat_0_y",
+      "type": "linear",
+      "domain": {"data": "data_0", "field": "Confirmed"},
+      "domainRaw": {"signal": "selector123[\"Confirmed\"]"},
+      "range": [{"signal": "concat_1_height"}, 0],
+      "nice": true,
+      "zero": true
+    },
+    {
+      "name": "concat_1_concat_1_x",
+      "type": "time",
+      "domain": {"data": "data_0", "field": "Date"},
+      "domainRaw": {"signal": "selector123[\"Date\"]"},
+      "range": [0, {"signal": "concat_1_concat_1_width"}]
+    },
+    {
+      "name": "concat_1_concat_1_y",
+      "type": "linear",
+      "domain": {"data": "data_0", "field": "Active"},
+      "domainRaw": {"signal": "selector123[\"Active\"]"},
+      "range": [{"signal": "concat_1_height"}, 0],
+      "nice": true,
+      "zero": true
+    },
+    {
+      "name": "concat_2_concat_0_x",
+      "type": "time",
+      "domain": {"data": "data_0", "field": "Date"},
+      "domainRaw": {"signal": "selector123[\"Date\"]"},
+      "range": [0, {"signal": "concat_2_concat_0_width"}]
+    },
+    {
+      "name": "concat_2_concat_0_y",
+      "type": "linear",
+      "domain": {"data": "data_0", "field": "Deaths"},
+      "domainRaw": {"signal": "selector123[\"Deaths\"]"},
+      "range": [{"signal": "concat_2_height"}, 0],
+      "nice": true,
+      "zero": true
+    },
+    {
+      "name": "concat_2_concat_1_x",
+      "type": "time",
+      "domain": {"data": "data_0", "field": "Date"},
+      "domainRaw": {"signal": "selector123[\"Date\"]"},
+      "range": [0, {"signal": "concat_2_concat_1_width"}]
+    },
+    {
+      "name": "concat_2_concat_1_y",
+      "type": "linear",
+      "domain": {"data": "data_0", "field": "Recovered"},
+      "domainRaw": {"signal": "selector123[\"Recovered\"]"},
+      "range": [{"signal": "concat_2_height"}, 0],
+      "nice": true,
+      "zero": true
     }
   ],
   "legends": [
     {
       "stroke": "color",
-      "gradientLength": {"signal": "clamp(height, 64, 200)"},
+      "gradientLength": {"signal": "clamp(concat_0_height, 64, 200)"},
       "symbolType": "stroke",
-      "title": "Type",
-      "encode": {"symbols": {"update": {"opacity": {"value": 0.7}}}}
+      "title": "Country",
+      "encode": {
+        "labels": {
+          "name": "Country_legend_labels",
+          "interactive": true,
+          "update": {
+            "opacity": [
+              {
+                "test": "(!length(data(\"selector122_store\")) || (selector122[\"Country\"] && indexof(selector122[\"Country\"], datum.value) >= 0))",
+                "value": 1
+              },
+              {"value": 0.35}
+            ]
+          }
+        },
+        "symbols": {
+          "name": "Country_legend_symbols",
+          "interactive": true,
+          "update": {
+            "opacity": [
+              {
+                "test": "(!length(data(\"selector122_store\")) || (selector122[\"Country\"] && indexof(selector122[\"Country\"], datum.value) >= 0))",
+                "value": 1
+              },
+              {"value": 0.35}
+            ]
+          }
+        },
+        "entries": {
+          "name": "Country_legend_entries",
+          "interactive": true,
+          "update": {"fill": {"value": "transparent"}}
+        }
+      }
     }
-  ]
+  ],
+  "config": {
+    "axis": {
+      "domainColor": "lightgray",
+      "grid": false,
+      "labelFont": "Roboto Condensed",
+      "ticks": false,
+      "titleFont": "Roboto Condensed",
+      "titleFontWeight": "normal"
+    },
+    "style": {"cell": {"strokeWidth": 0}}
+  }
 }
