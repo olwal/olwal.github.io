@@ -8,13 +8,23 @@
 </head>
 <body>
 
-<div id="vis"></div>
+<div id="multi_plots"></div>
+
+<div id="country_plots"></div>
+
 
 <script type="text/javascript">
-  var spec = "multi_plots.json";
-  vegaEmbed('#vis', spec).then(function(result) {
+  
+  var spec_multi = "multi_plots.json";
+  vegaEmbed('#multi_plots', spec_multi).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
+  
+  var spec_country = "country_plots.json";
+  vegaEmbed('#country_plots', spec_country).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+  
 </script>
 </body>
 </html>
