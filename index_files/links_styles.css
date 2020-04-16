@@ -1,0 +1,102 @@
+H2 
+{
+	color: #666666;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 14px;
+
+}
+.projectName 
+{
+	color: #C88C3C;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: x-small;
+}
+
+.projectDescription 
+{
+	color: #333333;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+
+
+}
+
+.publicationList
+{
+	color: #333333;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: xx-small;
+
+}
+
+.publicationInformation 
+{
+	color: #666666;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	text-decoration: none;
+
+
+
+
+}
+a:hover 
+{
+	color: #FF9900;
+	text-decoration: none;
+}
+
+a 
+{
+	text-decoration: none;
+	color: #666666;
+
+}
+.contactInformation 
+{
+	color: #999999;
+	font-size: x-small;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+
+}
+
+#lines 
+{
+	border: 1px solid #333333;
+	PADDING-BOTTOM: 0px; 
+	PADDING-TOP: 0px;
+}
+
+#lines2
+{
+	border: 1px solid #333333;
+	PADDING-BOTTOM: 0px; 
+	PADDING-TOP: 0px;
+}
+
+.abstract 
+{
+
+	color: #666666;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	text-decoration: none;
+}
+
+#abs_audiator {	display:none; }
+#abs_lightsense {	display:none; }
+#abs_astor {	display:none; }
+#abs_hybrid { display:none; }
+#abs_elastic {	display:none; }
+#abs_unit {	display:none; }
+#abs_immaterial {	display:none; }
+#abs_polar {	display:none; }
+#abs_senseshapes { display:none; }
+#abs_maven {	display:none; }
+#abs_flexible {	display:none; }
+#abs_fisheye {	display:none; }
+#abs_prosodic {	display:none; }
+#abs_mars {	display:none; }
+
