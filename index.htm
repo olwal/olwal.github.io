@@ -114,22 +114,14 @@ software/hardware prototyping.
 				
 					<td width="100%" valign="top">
 
-						<div id="multi_plots_daily"></div><br><br>
+						<div id="multi_matrix"></div><br><br>
 					
-						<div id="multi_plots_total"></div><br><br>
-
 						<div id="country_plots"></div><br><br>
-
 
 						<script type="text/javascript">
 						  
-						  var spec_multi_daily = "data/nlargest_day_multi_plots.json";
-						  vegaEmbed('#multi_plots_daily', spec_multi_daily).then(function(result) {
-							// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-						  }).catch(console.error);
-
-						  var spec_multi_total = "data/nlargest_total_multi_plots.json";
-						  vegaEmbed('#multi_plots_total', spec_multi_total).then(function(result) {
+						  var spec_multi_matrix = "data/nlargest_multi_matrix.json";
+						  vegaEmbed('#multi_matrix', spec_multi_matrix).then(function(result) {
 							// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 						  }).catch(console.error);
 						  
@@ -152,8 +144,7 @@ software/hardware prototyping.
 				
 					<td width="100%" valign="top">
 								
-						<div id="nordic_multi_plots_daily"></div><br><br>
-						<div id="nordic_multi_plots"></div><hr><br>
+						<div id="nordic_multi_matrix"></div><br><br>
 
 						<div id="denmark"></div><hr><br>
 						<div id="finland"></div><hr><br>
@@ -163,16 +154,11 @@ software/hardware prototyping.
 						
 						<script type="text/javascript">
 
-						  var spec_multi_daily = "data/nordic_day_multi_plots.json";
-						  vegaEmbed('#nordic_multi_plots_daily', spec_multi_daily).then(function(result) {
+						  var spec_nordic_multi_matrix = "data/nordic_multi_matrix.json";
+						  vegaEmbed('#nordic_multi_matrix', spec_nordic_multi_matrix).then(function(result) {
 							// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 						  }).catch(console.error);
-						
-						  var spec_multi = "data/nordic_total_multi_plots.json";
-						  vegaEmbed('#nordic_multi_plots', spec_multi).then(function(result) {
-							// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-						  }).catch(console.error);
-						  
+												  
 						  var spec_denmark = "data/denmark_country_plots.json";
 						  vegaEmbed('#denmark', spec_denmark).then(function(result) {
 							// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
