@@ -73,7 +73,7 @@ function processAir(data)
 			
 			if (toBuzz > 0)
 			{
-				window.navigator.vibrate(5000);
+//				window.navigator.vibrate(5000);
 				toBuzz--;
 			}
 			
@@ -87,7 +87,7 @@ function processAir(data)
 
 function setup()
 {
-	window.navigator.vibrate(10);
+//	window.navigator.vibrate(10);
 	
 	let params = getURLParams();
 	for (var key in params)
