@@ -1,14 +1,17 @@
 air = [];
 dataLoaded = false;
-timeToRefresh = 10; //seconds
+timeToRefresh = 60; //seconds
 timeLoaded = 0;
 nAir = 0;
 nSensors = 0;
 values = [];
+labels = [];
 aqipm25 = [];
 font = 0;
 
-var sensors = {
+var sensors = [];
+
+var defaultSensors = {
 	"FQKP8TFDAIDZMXTV": "19633",
 	"2KITRCU134L3RYS6": "63169",
 	"7ETKDV29585KQXFH": "18495",
@@ -21,21 +24,32 @@ function fetchData() {
 	
 	let i = 0;
 	
+	nSensors = Object.keys(sensors).length;
+		
 	for (var key in sensors)
 	{
-		let url = "https://www.purpleair.com/json?key=" + key + "&show=" + sensors[key]; 			
+		let url = "https://www.purpleair.com/json?key=" + key + "&show=" + sensors[key];
+		print(url);		
 		i++;			
 		setTimeout(function() { loadJSON(url, processAir) }, 10 * i);		
 	}
 }
 
 function preload() {
-	fetchData();
-	font = loadFont("fonts/Roboto-Bold.ttf");
+//	fetchData();
+	font = loadFont("fonts/Metropolis-Bold.ttf");
 }
+
+nBuzzes = 1;
+toBuzz = 0;
 
 function processAir(data)
 {
+	if (data.results == undefined || data.results[0] == undefined)
+	{
+		nSensors--;
+		return;
+	}
 
 	let id = data.results[0].ID;
 	air[id] = data.results[0];
@@ -46,12 +60,26 @@ function processAir(data)
 	print(id + ": " + value + " -> " + aqipm25[id]);
 
 	nAir = Object.keys(air).length;
-	nSensors = Object.keys(sensors).length;
 	
 	if (nAir == nSensors)
 	{
 		for (var _id in air)
+		{
+			if (values[_id] != undefined)
+			{
+				if (values[_id] > 50 && aqipm25[_id] < 50)
+					toBuzz = nBuzzes;
+			}
+			
+			if (toBuzz > 0)
+			{
+				window.navigator.vibrate(5000);
+				toBuzz--;
+			}
+			
 			values[_id] = aqipm25[_id];		
+			labels[_id] = air[_id]['Label'];
+		}
 
 		updatedTime = getTimeString();		
 	}
@@ -59,9 +87,18 @@ function processAir(data)
 
 function setup()
 {
+	window.navigator.vibrate(10);
+	
 	let params = getURLParams();
 	for (var key in params)
+	{
 		print(key + " " + params[key]);
+		sensors[key] = params[key];
+	}
+	
+	print(sensors);
+	
+	fetchData();
 	
 	createCanvas(windowWidth, windowHeight);
 
@@ -115,7 +152,7 @@ function draw()
 	w = width;
 	h = height/(nSensors + 1);
 		
-	let ts = h/3;
+	let ts = w/20;
 	let tx = 10;
 	let ty = 10;
 	let tdy = ts * 1.5;
@@ -137,6 +174,7 @@ function draw()
 
 
 		value = values[id];
+		label = labels[id];//air[id]['Label'];
 		//value = 50 * j++; //0, 50, 100, ...
 		//value = 10 + j++ * 10; //(10-60)
 
@@ -153,11 +191,11 @@ function draw()
 		
 		rect(0, 0, w, h);
 
-		stroke(0);
+		stroke(100);
 		fill(255);
 		strokeWeight(3);
 
-		text("" + value, w/2, h/2);
+		text(label + " (" + value + ")", w/2, h/2);
 		
 
 		translate(0, h);
