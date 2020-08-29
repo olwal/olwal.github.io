@@ -37,7 +37,7 @@ function fetchData() {
 
 function preload() {
 //	fetchData();
-	font = loadFont("fonts/Metropolis-Bold.ttf");
+	font = loadFont("fonts/Metropolis-Bold.otf");
 }
 
 nBuzzes = 1;
