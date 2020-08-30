@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+	<title>COVID-19 Visualizations - Alex Olwal, Ph.D.</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<link rel="stylesheet" type="text/css" href="index_files/balloontip.css">
+	<link rel="stylesheet" type="text/css" href="index_files/links_styles.css">
+			
+	<script type="text/javascript" src="index_files/balloontip.js">
+	/***********************************************
+	* Rich HTML Balloon Tooltip- Dynamic Drive DHTML code library (www.dynamicdrive.com)
+	* This notice MUST stay intact for legal use
+	* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+	***********************************************/
+	</script>
+
+	<script type="text/javascript" src="index_files/functions.js"> </script>
+
+	<script src="index_files/jquery.js" type="text/javascript"></script>	
+	
+	  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+	  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+	  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+	  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+	
+	<link href="index_files/styles.css" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" type="text/css" href="index_files/styles_002.css">
+
+
+	<script type="text/javascript">
+
+	  var spec_world = "data/air/world.json";
+	  vegaEmbed('#world', spec_world).then(function(result) {
+		// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+	  }).catch(console.error);
+							  
+	  var spec_usa = "data/air/usa.json";
+	  vegaEmbed('#usa', spec_usa).then(function(result) {
+		// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+	  }).catch(console.error);
+
+	  var spec_bay_area = "data/air/bay_area.json";
+	  vegaEmbed('#bay_area', spec_bay_area).then(function(result) {
+		// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+	  }).catch(console.error);
+
+	  var spec_mountain_view = "data/air/mountain_view.json";
+	  vegaEmbed('#mountain_view', spec_mountain_view).then(function(result) {
+		// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+	  }).catch(console.error);
+	  
+	</script>		
+	
+</head>
+<body id="top_of_page">
+
+<table class="border" width="1340" cellspacing="10" cellpadding="0" border="0" align="center">
+<tbody><tr>
+		
+		<td class="statement">I design and develop interactions and 
+technologies that embrace digital and physical experiences. 
+		I am specifically interested in tools, techniques and devices that 
+enable new interaction concepts for the augmentation and empowerment of 
+human abilities. This includes 3D user interfaces, interaction 
+techniques, augmented reality, mixed reality, virtual reality, 
+ubiquitous computing, mobile devices, novel interfaces for medical 
+imaging, multimodal systems, touch-screen interaction, and 
+software/hardware prototyping.
+		<br><br><br>
+
+	<a class="navigationLinks" href="http://olwal.com/research">Research&nbsp;Projects&nbsp;»</a>
+	
+	<a class="navigationLinks" href="http://olwal.com/publications">Publications&nbsp;»</a>
+	
+<!--
+	<a class="navigationLinks" href="?content=media">Popular&nbsp;Press&nbsp;&raquo;</a>
+-->
+	<a class="navigationLinks" href="http://olwal.com/scholar">Google Scholar&nbsp;»</a>
+
+	<a class="navigationLinks" href="http://github.com/olwal">Github&nbsp;»</a>
+	
+	</td>
+
+	<td class="details" valign="top" align="right">
+			<a href="http://www.olwal.com/" class="details">
+			Alex Olwal, Ph.D.<br>
+		</a>
+			Sr&nbsp;Research&nbsp;Scientist,&nbsp;Google<br>
+			olwal&nbsp;[at]&nbsp;acm.org<br>
+	</td>	
+	<td width="0" valign="top" align="right">
+		<span class="details">		
+			<img src="index_files/alex_olwal_70_70_color.jpg" alt="Alex Olwal" width="70" height="70">
+		</span>
+	</td>	
+
+
+	<!-- td align="right" valign="top">
+		<img class="border" src="images/alex.jpg" border="1" alt="Alex Olwal">
+	</td -->		
+</tr>
+</tbody>
+
+
+</table>	
+			<br id="research_projects">
+		<table class="border" width="1340" cellspacing="10" cellpadding="0" border="0" align="center">
+
+
+ 
+			<tbody>					
+				<tr>
+					<td class="themeTitle" colspan="4">World / USA / Bay area / Mountain View</td>
+				</tr>		
+
+				<tr>
+				
+					<td width="100%" valign="top">			
+
+					<table>
+						<tr>
+							<td><div id="world"></div></td>
+							<td><div id="usa"></div></td>
+						</tr>
+						<tr><td colspan="2"><br><br></td></tr>
+						<tr>
+							<td><div id="bay_area"></div></td>
+							<td><div id="mountain_view"></div><br></td>
+						</tr>
+						<tr><td colspan="2"><br><br></td></tr>
+						<tr>
+							<td colspan="2"><img src="air/images/purpleair_800.png"></td>
+						</tr>
+					</table>
+					
+					</td>
+				</tr>				
+	</tbody></table>
+
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+sc_project=2257314; 
+sc_invisible=1; 
+sc_partition=20; 
+sc_security="cbf0a961"; 
+</script>
+
+<script type="text/javascript" src="index_files/counter.js"></script><noscript><div class="statcounter"><a title="web stats" href="http://www.statcounter.com/" target="_blank"><img class="statcounter" src="http://c21.statcounter.com/2257314/0/cbf0a961/1/" alt="web stats" ></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+</body></html>
