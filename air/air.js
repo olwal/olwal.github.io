@@ -36,7 +36,6 @@ function fetchData() {
 	{
 		let url = "https://www.purpleair.com/json?show=" + sensors[i];
 		print(url);		
-		i++;			
 		setTimeout(function() { loadJSON(url, processAir) }, 10 * i);		
 	}
 }
@@ -96,23 +95,29 @@ function setup()
 {
 	let params = getURLParams();
 	
+//	print(params);
+	
 	nParams = Object.keys(params).length;
 	
 	if (nParams == 0)
+	{
 		sensors = defaultSensors;
+		fetchData();
+		print(sensors);
+	}
 	else
 	{
 		for (var key in params)
 		{
 			print(key + " " + params[key]);
-			sensorsMap[key] = params[key];
-			sensors.push(key);
+			sensors[key] = params[key];
 		}
+		
+		fetchDataMap();
+		print(sensorsMap);		
 	}
 	
-	print(sensors);
 	
-	fetchData();
 	
 	createCanvas(windowWidth, windowHeight);
 
@@ -149,6 +154,10 @@ function getTimeString()
 	currentTime = th + "." + tm + ":" + ts;
 	
 	return currentTime; 
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
 
 function draw()
