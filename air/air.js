@@ -122,7 +122,7 @@ function setup()
 	createCanvas(windowWidth, windowHeight);
 
 //	textFont(font);
-
+	
 }
 
 function reloadCheck()
@@ -131,7 +131,7 @@ function reloadCheck()
 	{
 		timeLoaded = millis();
 		air = [];
-		fetchData();
+		fetchDataMap();
 		
 	}
 }
@@ -227,7 +227,8 @@ function draw()
 	textSize(ts/2);
 	noStroke();
 	fill(220);
-	text("Updated " + updatedTime, w/2, h/2 - ts/2);
+	var remaining = int((timeToRefresh * 1000 - (millis() - timeLoaded))/1000);
+	text("Updated " + updatedTime  + " (in " + remaining + "s)", w/2, h/2 - ts/2);
 	fill(180);
 	text(currentTime, w/2, h/2 + ts/2);
 	
