@@ -30,8 +30,6 @@ var defaultSensorsMap = {
 
 function fetchData() {
 	
-	let i = 0;
-	
 	nSensors = len(sensors);
 		
 	for (var i = 0; i < nSensors; i++)
