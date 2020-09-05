@@ -1,6 +1,6 @@
 air = [];
 dataLoaded = false;
-timeToRefresh = 60; //seconds
+timeToRefresh = 10; //seconds
 timeLoaded = 0;
 nAir = 0;
 nSensors = 0;
@@ -10,17 +10,41 @@ aqipm25 = [];
 font = 0;
 
 var sensors = [];
+var sensorsMap = [];
+
+// 19633&A=28299&J=46475&K=21449&D=44911&D=60163&G=5642&R=15883&S=60231
 
 var defaultSensors = {
+	19633, 28299, 46475, 21449, 44911, 60163, 5642, 15883, 60231, 2014, 23081 };
+
+var defaultSensorsMap = {
 	"FQKP8TFDAIDZMXTV": "19633",
 	"2KITRCU134L3RYS6": "63169",
 	"7ETKDV29585KQXFH": "18495",
 	"VRDRK0A6WMO0AHX6": "36991",
 	"W02G1W6NS121WGVU": "35029",
-	"JTNKAV40HCYEJAUO": "21055"
+	"JTNKAV40HCYEJAUO": "21055", //Almond school
+	"YZDS57RKGGTSUA3W": "2014", //pasadena
+	"7HQ87KA2BFUN86YM": "23081" //santa barbara	
 };
 
 function fetchData() {
+	
+	let i = 0;
+	
+	nSensors = len(sensors);
+		
+	for (var i = 0; i < nSensors; i++)
+	{
+		let url = "https://www.purpleair.com/json?show=" + sensors[i];
+		print(url);		
+		i++;			
+		setTimeout(function() { loadJSON(url, processAir) }, 10 * i);		
+	}
+}
+
+
+function fetchDataMap() {
 	
 	let i = 0;
 	
@@ -37,11 +61,8 @@ function fetchData() {
 
 function preload() {
 //	fetchData();
-	font = loadFont("fonts/Metropolis-Bold.otf");
+//	font = loadFont("fonts/Roboto-Bold.ttf");
 }
-
-nBuzzes = 1;
-toBuzz = 0;
 
 function processAir(data)
 {
@@ -65,18 +86,6 @@ function processAir(data)
 	{
 		for (var _id in air)
 		{
-			if (values[_id] != undefined)
-			{
-				if (values[_id] > 50 && aqipm25[_id] < 50)
-					toBuzz = nBuzzes;
-			}
-			
-			if (toBuzz > 0)
-			{
-//				window.navigator.vibrate(5000);
-				toBuzz--;
-			}
-			
 			values[_id] = aqipm25[_id];		
 			labels[_id] = air[_id]['Label'];
 		}
@@ -87,13 +96,20 @@ function processAir(data)
 
 function setup()
 {
-//	window.navigator.vibrate(10);
-	
 	let params = getURLParams();
-	for (var key in params)
+	
+	nParams = Object.keys(params).length;
+	
+	if (nParams == 0)
+		sensors = defaultSensors;
+	else
 	{
-		print(key + " " + params[key]);
-		sensors[key] = params[key];
+		for (var key in params)
+		{
+			print(key + " " + params[key]);
+			sensorsMap[key] = params[key];
+			sensors.push(key);
+		}
 	}
 	
 	print(sensors);
@@ -102,7 +118,7 @@ function setup()
 	
 	createCanvas(windowWidth, windowHeight);
 
-	textFont(font);
+//	textFont(font);
 
 }
 
@@ -152,7 +168,7 @@ function draw()
 	w = width;
 	h = height/(nSensors + 1);
 		
-	let ts = w/20;
+	let ts = h/3;
 	let tx = 10;
 	let ty = 10;
 	let tdy = ts * 1.5;
@@ -191,7 +207,7 @@ function draw()
 		
 		rect(0, 0, w, h);
 
-		stroke(100);
+		stroke(0);
 		fill(255);
 		strokeWeight(3);
 
@@ -213,5 +229,5 @@ function draw()
 
 function mousePressed()
 {
-	
+	window.navigator.vibrate(1000);
 }
