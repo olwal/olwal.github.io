@@ -14,6 +14,8 @@ var sensorsMap = [];
 
 // 19633&A=28299&J=46475&K=21449&D=44911&D=60163&G=5642&R=15883&S=60231
 
+var locationData = null;
+
 var defaultSensors = [
 	19633, 28299, 46475, 21449, 44911, 60163, 5642, 15883, 60231, 2014, 23081 ];
 
@@ -56,9 +58,13 @@ function fetchDataMap() {
 	}
 }
 
+var sensorTable;
+
 function preload() {
 //	fetchData();
 //	font = loadFont("fonts/Roboto-Bold.ttf");
+
+	sensorTable = loadTable('data/outside_sensors_minimal_sorted.csv', 'csv', 'header');
 }
 
 function processAir(data)
@@ -91,8 +97,121 @@ function processAir(data)
 	}
 }
 
+function locationCallback(location)
+{
+	locationData = location;
+
+	print(locationData.latitude)
+	print(locationData.longitude)
+	print(locationData.accuracy)
+	print(locationData.altitude)
+	print(locationData.altitudeAccuracy)
+	print(locationData.heading)
+	print(locationData.speed)
+	
+	calculateDistances();
+	
+	sensors = nearestSensors;
+	nSensors = 1;
+	air = [];
+	values = [];
+	labels = [];
+	fetchData();
+}
+
+var closest = [ ];
+var nClosest = 1;
+var closestIds = [ ];
+
+var nearestSensors = [ ];
+var nNearest = 10;
+var nearest = [ ];
+
+function calculateDistances()
+{
+	nearest = [ ];
+	
+	for (let r = 0; r < sensorTable.getRowCount(); r++) 
+	{
+		let row = sensorTable.getRow(r);
+		let id = row.obj['id'];
+		let lon = row.obj['longitude'];
+		let lat = row.obj['latitude'];			
+		distance = dist(locationData.longitude, locationData.latitude, lon, lat);		
+		sensorTable.set(r, 'distance', distance);
+		
+		// print("[ " + r + "] " + distance);
+		
+	/*	print(closest[0]);
+		
+		if (closest[0] < 0 || distance < closest[0])
+		{
+			closest[0] = distance;
+			closestIds[0] = id;
+			
+			print("updated " + id + " " + distance);
+		}	
+		*/
+		/*
+		if (closest.length < nClosest)
+		{
+			closest.push(distance);
+			closestIds.push(id);
+		}
+		else
+		{
+			for (let i = 0; i < closest.length; i++)
+			{
+				if (distance < closest[i])
+				{
+					closest[i] = distance;
+					closestIds[i] = id;
+
+					print("updated " + id + " " + distance);
+
+				}
+			}
+		}*/
+
+		if (nearest.length < nNearest)
+		{
+			nearest.push([id, distance])
+			
+			nearest.sort( 
+				function compare(a, b)
+				{
+					if (a[1] > b[1]) return 1;
+					if (a[1] < b[1]) return -1;
+					
+					return 0;
+				}
+			);
+		}
+		else
+		{
+			for (let i = 0; i < nearest.length; i++)
+			{
+				if (distance < nearest[i][1])
+				{
+					nearest[i] = [id, distance];
+
+					print("updated " + id + " " + distance);
+
+					break;
+				}
+			}
+		}
+
+	}
+	
+	for (let i = 0; i < nearest.length; i++)
+		nearestSensors.push(nearest[i][0]);
+}
+
 function setup()
 {
+	sensorTable.addColumn('distance');
+	
 	let params = getURLParams();
 	
 //	print(params);
@@ -121,6 +240,10 @@ function setup()
 	
 	createCanvas(windowWidth, windowHeight);
 
+	
+	getCurrentPosition(locationCallback);
+	
+		
 //	textFont(font);
 	
 }
@@ -131,7 +254,8 @@ function reloadCheck()
 	{
 		timeLoaded = millis();
 		air = [];
-		fetchDataMap();
+//		fetchDataMap();
+		fetchData();
 		
 	}
 }
@@ -158,6 +282,23 @@ function getTimeString()
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+}
+
+var buttons = [];
+
+function getLocation(sensorId)
+{
+	
+//	print(sensorId);
+	
+	row = sensorTable.findRow(sensorId, 'id');
+	
+//	print(row);
+	
+	lon = row.obj['longitude'];
+	lat = row.obj['latitude'];
+	
+	return [lon, lat];
 }
 
 function draw()
@@ -188,7 +329,8 @@ function draw()
 	push();
 
 	textAlign(CENTER);
-	
+
+/*	
 	for (var id in values)
 	{
 		strokeWeight(ts/20);
@@ -211,6 +353,7 @@ function draw()
 		c = lerpColor(color(c0), color(c1), t);
 		
 		fill(c);
+
 		
 		rect(0, 0, w, h);
 
@@ -222,15 +365,98 @@ function draw()
 		
 
 		translate(0, h);
-	}
+	}*/
+
+	var k = 0;
 		
+	buttons = [];
+		
+	for (var id in values)
+	{
+		strokeWeight(ts/20);
+		stroke(0);
+		//text(id + ": " + values[id], tx, ty += tdy);
+
+
+		value = values[id];
+		label = labels[id];//air[id]['Label'];
+		//value = 50 * j++; //0, 50, 100, ...
+		//value = 10 + j++ * 10; //(10-60)
+
+
+		colorIndex = int(value/50);
+		c0 = colors[colorIndex];
+		c1 = colors[colorIndex + 1];
+		t = (value % 50) / 50.0;
+		
+		// c = color(colors[colorIndex]);
+		c = lerpColor(color(c0), color(c1), t);
+		
+		fill(c);
+
+		button = new Clickable();
+		
+		button.x = 0;
+		button.y = h * k;
+		button.cornerRadius = 0;
+		button.strokeWeight = 0;
+		button.width = w;
+		button.height = h ;
+		button.text = label + " (" + value + ")";
+		button.textScaled = true;
+		button.color = c;
+		button.textColor = "#FFFFFF";
+		button.textSize = 40;
+		
+//		labels.push(label);
+
+		buttons.push(button);
+
+		let labelCallback = label;
+		let idCallback = id;
+		
+		loc = getLocation(idCallback)
+		
+		let urlCallback = "https://www.purpleair.com/map?opt=1/i/mAQI/a10/cC0&select=" + id + "#11.6/" + loc[1] + "/" + loc[0];
+		
+		buttons[k].onPress = function()
+		{
+			print(labelCallback);
+			window.open(urlCallback, "_self");
+//			print(getLocation(idCallback));
+		}
+		
+		buttons[k].draw();
+		
+		/*
+		stroke(0);
+		fill(255);
+		strokeWeight(3);
+*/
+		
+
+//		translate(0, h);
+		k++;
+	}
+	
+	translate(0, h * k);
+	
 	textSize(ts/2);
 	noStroke();
 	fill(220);
 	var remaining = int((timeToRefresh * 1000 - (millis() - timeLoaded))/1000);
 	text("Updated " + updatedTime  + " (in " + remaining + "s)", w/2, h/2 - ts/2);
 	fill(180);
-	text(currentTime, w/2, h/2 + ts/2);
+	
+	if (locationData == null)
+		text(currentTime, w/2, h/2 + ts/2);
+	else
+	{
+		let lat = parseFloat(locationData.latitude).toFixed(2);
+		let lon = parseFloat(locationData.longitude).toFixed(2);
+		
+		text(currentTime + " [ " + lat + ", " + lon + " ]", w/2, h/2 + ts/2);
+	}
 	
 	pop();
 }
