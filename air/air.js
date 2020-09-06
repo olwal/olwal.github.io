@@ -101,8 +101,20 @@ function processAir(data)
 var currentLatitude = 0;
 var currentLongitude = 0;
 
-function locationCallback(position)
+var locationOK = false;
+var logMessage = ""
+
+function locationError(err)
 {
+	locationOK = false;
+	logMessage = err.code + " " + err.message;
+}
+
+function locationSuccess(position)
+{
+	locationOK = true;
+	logMessage = "location obtained!";
+	
 	print(position.coords.latitude)
 	print(position.coords.longitude)
 	
@@ -121,6 +133,7 @@ function locationCallback(position)
 
 function locationCallbackLib(location)
 {
+	locationOK = true;
 	locationData = location;
 
 	print(locationData.latitude)
@@ -232,6 +245,12 @@ function calculateDistances()
 		nearestSensors.push(nearest[i][0]);
 }
 
+var locationOptions = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
 function setup()
 {
 	sensorTable.addColumn('distance');
@@ -265,7 +284,7 @@ function setup()
 	createCanvas(windowWidth, windowHeight);
 
 	
-	navigator.geolocation.getCurrentPosition(locationCallback);
+	navigator.geolocation.getCurrentPosition(locationSuccess, locationError, locationOptions);
 //	getCurrentPosition(locationCallback);
 	
 		
@@ -473,6 +492,8 @@ function draw()
 	var remaining = int((timeToRefresh * 1000 - (millis() - timeLoaded))/1000);
 	text("Updated " + updatedTime  + " (in " + remaining + "s)", w/2, h/2 - ts/2);
 	fill(180);
+	
+	text(currentTime + " " + logMessage, w/2, h/2 + ts/2);
 	
 	if (locationData == null)
 		text(currentTime, w/2, h/2 + ts/2);
