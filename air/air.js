@@ -64,6 +64,7 @@ function preload() {
 //	fetchData();
 //	font = loadFont("fonts/Roboto-Bold.ttf");
 
+	 font = loadFont("fonts/Metropolis-Bold.otf");
 	sensorTable = loadTable('data/outside_sensors_minimal_sorted.csv', 'csv', 'header');
 }
 
@@ -244,7 +245,7 @@ function setup()
 	getCurrentPosition(locationCallback);
 	
 		
-//	textFont(font);
+	textFont(font);
 	
 }
 
@@ -407,6 +408,7 @@ function draw()
 		button.color = c;
 		button.textColor = "#FFFFFF";
 		button.textSize = 40;
+		button.textFont = "Metropolis-Bold";
 		
 //		labels.push(label);
 
