@@ -98,7 +98,28 @@ function processAir(data)
 	}
 }
 
-function locationCallback(location)
+var currentLatitude = 0;
+var currentLongitude = 0;
+
+function locationCallback(position)
+{
+	print(position.coords.latitude)
+	print(position.coords.longitude)
+	
+	currentLatitude = position.coords.latitude;
+	currentLongitude = position.coords.longitude;
+	
+	calculateDistances();
+	
+	sensors = nearestSensors;
+	nSensors = 1;
+	air = [];
+	values = [];
+	labels = [];
+	fetchData();
+}
+
+function locationCallbackLib(location)
 {
 	locationData = location;
 
@@ -120,6 +141,7 @@ function locationCallback(location)
 	fetchData();
 }
 
+
 var closest = [ ];
 var nClosest = 1;
 var closestIds = [ ];
@@ -138,7 +160,8 @@ function calculateDistances()
 		let id = row.obj['id'];
 		let lon = row.obj['longitude'];
 		let lat = row.obj['latitude'];			
-		distance = dist(locationData.longitude, locationData.latitude, lon, lat);		
+//		distance = dist(locationData.longitude, locationData.latitude, lon, lat);		
+		distance = dist(currentLongitude, currentLatitude, lon, lat);		
 		sensorTable.set(r, 'distance', distance);
 		
 		// print("[ " + r + "] " + distance);
@@ -242,7 +265,8 @@ function setup()
 	createCanvas(windowWidth, windowHeight);
 
 	
-	getCurrentPosition(locationCallback);
+	navigator.geolocation.getCurrentPosition(locationCallback);
+//	getCurrentPosition(locationCallback);
 	
 		
 	textFont(font);
