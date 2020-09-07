@@ -7,6 +7,7 @@ nSensors = 0;
 values = [];
 labels = [];
 aqipm25 = [];
+temp = [];
 font = 0;
 
 var sensors = [];
@@ -92,6 +93,7 @@ function processAir(data)
 		{
 			values[_id] = aqipm25[_id];		
 			labels[_id] = air[_id]['Label'];
+			temp[_id] = air[_id]['temp_f'];
 		}
 
 		updatedTime = getTimeString();		
@@ -174,7 +176,8 @@ function calculateDistances()
 		let lon = row.obj['longitude'];
 		let lat = row.obj['latitude'];			
 //		distance = dist(locationData.longitude, locationData.latitude, lon, lat);		
-		distance = dist(currentLongitude, currentLatitude, lon, lat);		
+		distance = calcGeoDistance(currentLongitude, currentLatitude, lon, lat);
+		//dist(currentLongitude, currentLatitude, lon, lat);		
 		sensorTable.set(r, 'distance', distance);
 		
 		// print("[ " + r + "] " + distance);
@@ -241,8 +244,20 @@ function calculateDistances()
 
 	}
 	
+	nearest.sort( 
+				function compare(a, b)
+				{
+					if (a[1] > b[1]) return 1;
+					if (a[1] < b[1]) return -1;
+					
+					return 0;
+				}
+			);
+		
 	for (let i = 0; i < nearest.length; i++)
+	{
 		nearestSensors.push(nearest[i][0]);
+	}
 }
 
 var locationOptions = {
@@ -339,6 +354,9 @@ function getLocation(sensorId)
 	
 //	print(row);
 	
+	if (row == null)
+		return [-1, -1];
+	
 	lon = row.obj['longitude'];
 	lat = row.obj['latitude'];
 	
@@ -414,9 +432,17 @@ function draw()
 	var k = 0;
 		
 	buttons = [];
-		
-	for (var id in values)
+
+//	v = values;
+	
+//	if (locationOK)
+//		v = sensors;
+	
+//	for (var id in values)
+	for (var i = 0; i < sensors.length; i++)
 	{
+		let id = sensors[i];
+		
 		strokeWeight(ts/20);
 		stroke(0);
 		//text(id + ": " + values[id], tx, ty += tdy);
@@ -426,7 +452,7 @@ function draw()
 		label = labels[id];//air[id]['Label'];
 		//value = 50 * j++; //0, 50, 100, ...
 		//value = 10 + j++ * 10; //(10-60)
-
+		fahrenheit = temp[id];
 
 		colorIndex = int(value/50);
 		c0 = colors[colorIndex];
@@ -439,6 +465,23 @@ function draw()
 		fill(c);
 
 		button = new Clickable();
+
+		locationString = "";
+		
+		if (locationOK)
+		{
+			row = sensorTable.findRow(id, 'id');
+			
+			if (row != null)
+			{
+				let l1 = row.obj['longitude'];
+				let l2 = row.obj['latitude'];			
+		//		distance = dist(locationData.longitude, locationData.latitude, lon, lat);		
+				distance = calcGeoDistance(currentLongitude, currentLatitude, l1, l2);
+				distance = parseFloat(distance).toFixed(1)
+				locationString = (" [~" + distance + " miles]");
+			}
+		}
 		
 		button.x = 0;
 		button.y = h * k;
@@ -446,7 +489,7 @@ function draw()
 		button.strokeWeight = 0;
 		button.width = w;
 		button.height = h ;
-		button.text = label + " (" + value + ")";
+		button.text = label + " (" + value + ", " + fahrenheit + "F)" + locationString;
 		button.textScaled = true;
 		button.color = c;
 		button.textColor = "#FFFFFF";
@@ -493,8 +536,19 @@ function draw()
 	text("Updated " + updatedTime  + " (in " + remaining + "s)", w/2, h/2 - ts/2);
 	fill(180);
 	
-	text(currentTime + " " + logMessage, w/2, h/2 + ts/2);
+	if (locationOK)
+	{
+		let lat = currentLatitude; //parseFloat(locationData.latitude).toFixed(2);
+		let lon = currentLongitude; //parseFloat(locationData.longitude).toFixed(2);
+		
+		text(currentTime + " [ " + lat + ", " + lon + " ] " + logMessage, w/2, h/2 + ts/2);
+	}
+	else 
+		text(currentTime + " " + logMessage, w/2, h/2 + ts/2);
+
 	
+	
+/*	
 	if (locationData == null)
 		text(currentTime, w/2, h/2 + ts/2);
 	else
@@ -504,7 +558,7 @@ function draw()
 		
 		text(currentTime + " [ " + lat + ", " + lon + " ]", w/2, h/2 + ts/2);
 	}
-	
+*/	
 	pop();
 }
 
