@@ -123,10 +123,15 @@ software/hardware prototyping.
 
 						<script type="text/javascript">
 						  
-						  var spec_multi_matrix = "data/nlargest_matrix_d.json";
+						  var spec_multi_matrix = "data/nlargest_multi_matrix.json";
 						  vegaEmbed('#multi_matrix', spec_multi_matrix).then(function(result) {
 							// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-						  }).catch(console.error);						  
+						  }).catch(console.error);
+						  
+						  var spec_country = "data/nlargest_country_plots.json";
+						  vegaEmbed('#country_plots', spec_country).then(function(result) {
+							// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+						  }).catch(console.error);
 						  
 						</script>		
 					
@@ -144,12 +149,44 @@ software/hardware prototyping.
 								
 						<div id="nordic_multi_matrix"></div><br><br>
 
+						<div id="denmark"></div><hr><br>
+						<div id="finland"></div><hr><br>
+						<div id="iceland"></div><hr><br>
+						<div id="norway"></div><hr><br>
+						<div id="sweden"></div><hr><br>
+						
 						<script type="text/javascript">
 
-						  var spec_nordic_multi_matrix = "data/nordic_matrix_d.json";
+						  var spec_nordic_multi_matrix = "data/nordic_multi_matrix.json";
 						  vegaEmbed('#nordic_multi_matrix', spec_nordic_multi_matrix).then(function(result) {
 							// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 						  }).catch(console.error);
+												  
+						  var spec_denmark = "data/denmark_country_plots.json";
+						  vegaEmbed('#denmark', spec_denmark).then(function(result) {
+							// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+						  }).catch(console.error);
+
+						  var spec_finland = "data/finland_country_plots.json";
+						  vegaEmbed('#finland', spec_finland).then(function(result) {
+							// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+						  }).catch(console.error);
+
+						  var spec_iceland = "data/iceland_country_plots.json";
+						  vegaEmbed('#iceland', spec_iceland).then(function(result) {
+							// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+						  }).catch(console.error);
+
+						  var spec_norway = "data/norway_country_plots.json";
+						  vegaEmbed('#norway', spec_norway).then(function(result) {
+							// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+						  }).catch(console.error);
+
+						  var spec_sweden = "data/sweden_country_plots.json";
+						  vegaEmbed('#sweden', spec_sweden).then(function(result) {
+							// Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+						  }).catch(console.error);
+						  
 						  
 						</script>		
 					
