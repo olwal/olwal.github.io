@@ -36,12 +36,32 @@ Procedural.setUserLocationControlVisible( true );
 Procedural.setRotationControlVisible( true );
 Procedural.setZoomControlVisible( true );
 
+let bbox = [ -123.431396,35.855666,-120.215149,38.801189 ];
+
+let bounds = {
+  sw: { latitude: 36.238968, longitude: -123.323225 }, 
+  ne: { latitude: 30, longitude: -120 }
+};
+/*
+let bounds = {
+  sw: { latitude: bbox[1], longitude: bbox[0] },
+  ne: { latitude: bbox[3], longitude: bbox[2] }        
+  }
+*/
+//Procedural.setCameraMode('2D');  
+
+
+
 window.Procedural = Procedural;
 
 let target = {
 //  latitude: -45.38, longitude: 167.34
-  latitude: 37.4133981, longitude:  -122.1163721
-}
+//  latitude: 37.4133981, longitude:  -122.1163721, 
+  latitude: 37.512070759717645, longitude: -122.29158348430136,
+  distance: 50000,
+  angle: 35, bearing: -20
+//  latitude: bbox[3], longitude: bbox[2]
+};
 
 class AirQualityColors 
 {
@@ -162,6 +182,10 @@ class Overlays
       node.geometry = geometry;
     
       let aqi = parseInt(data[i][3]);
+
+      if (isNaN(aqi))
+        continue;
+
 //      console.log(aqi);
       let colorAqi = AirQualityColors.getColorHex(aqi);
 
@@ -169,7 +193,7 @@ class Overlays
       node.properties.borderRadius = 25;
       node.properties.color = '#ffffff';
       node.properties.padding = 10;
-  //    node.properties.name = aqi;
+      //node.properties.name = data[i][7];//aqi;
       node.properties.background = colorAqi; //data[i][4];
       
 //      console.log(node.id + " " + data[i][1] + " " + data[1][2] + " " + aqi + " " + colorAqi);
@@ -241,9 +265,9 @@ var configuration = {
   // Minimum distance camera can approach scene
 //  minDistance: 1000,
   // Maximum distance camera can move from scene
-//  maxDistance: 10000,
+  maxDistance: 50000,
   // Maximum distance camera target can move from scene
-//  maxBounds: 7500,
+  maxBounds: 7500000,
   // Minimum polar angle of camera
 //  minPolarAngle: 0.25 * Math.PI,
   // Maximum polar angle of camera
@@ -256,21 +280,44 @@ var configuration = {
   noZoom: false
 };
 
+Procedural.onLocationFocused = function () {
+  Procedural.orbitTarget();
+};
+
 Procedural.configureControls( configuration );
 
 var environment = {
   title: 'custom',
   parameters: {
-    inclination: 0.6,
+    inclination: 45,
     fogDropoff: 0.000
   }
 };
-Procedural.setEnvironment( environment )
+Procedural.setEnvironment( environment );
+
+
+
 
 Procedural.displayLocation( target );
+
+
+//Procedural.focusOnFeature(100);
+//Procedural.focusOnBounds(bounds);
+
 // Procedural.addOverlay( overlay );
-Procedural.focusOnFeature(0);
+//Procedural.focusOnFeature(0);
 
 
 //o = Overlays.buildFromData(data, "map");
 //Procedural.addOverlay(o);
+
+
+
+
+
+/*
+var bounds = {
+  sw: { latitude: 44.5, longitude: 6.3 },
+  ne: { latitude: 44.4, longitude: 6.4 }
+};
+*/

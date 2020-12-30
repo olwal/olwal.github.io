@@ -1,13 +1,13 @@
 const containerP5 = document.getElementById('p5');
 
-let canvasWidth = 400;
-let canvasHeight = 30;
+let canvasWidth = window.innerWidth; //400;
+let canvasHeight = 20;
 
-let bbox = [ -123.431396,35.855666,-120.215149,38.801189 ];
+// let bbox = [ -123.431396,35.855666,-120.215149,38.801189 ];
 
 let air;
 
-let updateInterval = 30000;
+let updateInterval = 60000;
 
 let dataPath = 'data/outside_sensors_bay_area.csv';
 
@@ -25,11 +25,37 @@ let realtime = true;
 let lastUpdated = -1;
 var overlayObject = new Overlays();
 
+let initialized = false;
+
 function setup()
 {
     air.init(updateInterval);
+    //air.init(updateInterval, 10);
+    
+    self = air;
+
     air.onUpdateCallback = function(sensors)
     {       
+        if (!initialized)
+        {
+//        Procedural.environmentEditor();
+        //Procedural.focusOnBounds(bounds);
+        //console.log(self.bounds);
+            Procedural.focusOnLocation(target);
+
+            Procedural.onFeatureClicked = function (id) {
+                // console.log( 'Feature clicked:', id );
+                self.updateSelected(id);
+            }
+
+            initialized = true;
+        }
+
+        if (self.selected != undefined)
+        {
+            self.updateSelected(self.selected[0]);
+        }
+
         callbackData = []
         
         for (let r = 0; r < sensors.getRowCount(); r++)
@@ -44,21 +70,31 @@ function setup()
         }
     }
 
-    let can = createCanvas(canvasWidth, canvasHeight);
+    let can = createCanvas(canvasWidth, canvasHeight * 2);
     can.parent(containerP5);
 
-    textSize(canvasHeight * 0.8);
+    textSize(canvasHeight * 0.5);
     textFont("Inter");
     textAlign(CENTER);
 
+
+/*
+    bounds = {
+        sw: { latitude: bbox[0], longitude: bbox[3] },
+        ne: { latitude: bbox[2], longitude: bbox[1] }        
+    };
+
+    Procedural.focusOnBounds(bounds);
+*/
 //   o = Overlays.buildFromData(data, "map");
 //   Procedural.addOverlay(o);
 
 //    overlayObject.loadFromFiles();
 }
   
-function mousePressed()
+function keyPressed()
 {
+    Procedural.focusOnLocation(target);
 //    playback = !playback;
 //    realtime = !realtime;
 //    console.log(playback);
@@ -66,6 +102,56 @@ function mousePressed()
 }
 
 function draw()
+{
+    drawAbove();
+}
+
+function drawAbove()
+{
+    background(255);
+
+    let textString = "Preparing data...";
+
+    if (air.updatingSensors)
+    {
+        fraction = air.nSensorsUpdated/air.nSensors;
+        noStroke();
+        fill(100, 100);
+        rect(0, height * 0.8, width * fraction, height);
+
+        textString = "Real-time air quality sensor data: Updated " + (100 * fraction).toFixed(0) + "%";
+    }
+    else
+    {
+        noStroke();
+        fill(100, 100);
+        rect(0, height * 0.8, width, height);
+
+        if (lastUpdated >= 0)
+            textString = "Real-time air quality sensor data: Updated " + ((millis() - lastUpdated)/1000).toFixed(0) + "s ago";
+    }
+
+//    console.log(textString + " " + air.updatingSensors + " " + air.nSensors);
+
+    w = textWidth(textString);
+
+    fill(100);
+    textAlign(LEFT);
+    text(textString, textSize()/4, textSize() * 1.3);
+
+    if (air.selected != undefined)
+    {
+        text("AQI " + air.selected[3] + "     " + air.selected[4] + String.fromCharCode(176) + "F     " + 
+        //air.selected[5] + " " + air.selected[6] + " " + 
+        air.selected[7] + 
+        "     longitude " + air.selected[1].toFixed(4) + ", latitude " + air.selected[2].toFixed(4) + "" 
+        
+        , textSize()/4, textSize() * 2.7);        
+    }
+
+}
+
+function drawOverlay()
 {
     let textString = "Preparing data...";
     
@@ -96,11 +182,20 @@ function draw()
     text(textString, 0, 0);
 }
 
+function windowResized() {
+    resizeCanvas(windowWidth, canvasHeight);
+  }
+
 class PurpleAir 
 {
     self;
     static colors;
     static mapping;
+
+    latitudes = [ 10000, -10000 ];
+    longitudes = [ 10000, -10000 ];  
+    
+    selected = undefined;
 
     preload()
     {
@@ -110,7 +205,7 @@ class PurpleAir
         this.sensors = loadTable(dataPath, 'csv', 'header');   
     }
 
-    init(updateInterval)
+    init(updateInterval, limitSensorsToLoad = -1)
     {
         self.updateInterval = updateInterval;
 
@@ -121,21 +216,60 @@ class PurpleAir
                 let num = self.sensors.getNum(r, c);
                 //print(r + " " + c + " " + num + " " + int(num));
                 self.sensors.set(r, c, num);
+
+                if (c == 1) //longitude
+                {
+                    if (num < this.longitudes[0])
+                        this.longitudes[0] = num;
+                    else if (num > this.longitudes[1])
+                        this.longitudes[1] = num;
+                }
+                else if (c == 2) //latitude
+                {
+                    if (num < this.latitudes[0])
+                        this.latitudes[0] = num;
+                    else if (num > this.latitudes[1])
+                        this.latitudes[1] = num;
+                }
             }
                 
+        this.bounds = {
+            sw: { latitude: this.latitudes[0], longitude: this.longitudes[0] }, 
+            ne: { latitude: this.latitudes[1], longitude: this.longitudes[1] }
+        };
+
         self.sensors.addColumn('aqi');
         self.sensors.addColumn('temp_f');
+        self.sensors.addColumn('pressure');
+        self.sensors.addColumn('humidity');
         self.sensors.addColumn('label');
 
-        self.nSensors = self.sensors.rows.length;
+        if (limitSensorsToLoad > 0)
+            self.nSensors = limitSensorsToLoad
+        else
+            self.nSensors = self.sensors.rows.length;
         self.nSensorsUpdated = 0;
         self.updatingSensors = false;
 
         self.fetchData();
     }
 
+    updateSelected(id)
+    {
+        let row = this.findRow(id);
+        if (row >= 0)
+        {
+            this.selected = this.sensors.rows[row].arr;
+            console.log(this.sensors.rows[row].arr);
+        }
+        else
+            this.selected = undefined;
+    }
+
     fetchData() 
-    {           
+    {         
+        self.updatingSensors = true;  
+        console.log("Starting update...");
         for (var i = 0; i < self.nSensors; i++)
         {
             //let self = this; 
@@ -144,14 +278,12 @@ class PurpleAir
             let url = "https://www.purpleair.com/json?show=" + sensorId;
             //print(url);		
             setTimeout(function() { 
-                try
-                { loadJSON(url, self.onFetched) }
-                catch
-                {
-                    console.log("failed at JSON");
-                    self.onFetched(undefined);
-                }
-                
+                 loadJSON(url, self.onFetched, 
+                    function (response) { //onError
+                        console.log("fetchData: loadJSON" + response);
+                        self.onFetched(undefined);
+                    }
+                    )                 
                 }
                 , 10);
         }
@@ -205,6 +337,10 @@ class PurpleAir
             let row = self.findRow(id)
 
             self.sensors.set(row, "aqi", aqi);
+            self.sensors.set(row, "label", results.Label);
+            self.sensors.set(row, "temp_f", results.temp_f);
+            self.sensors.set(row, "pressure", results.pressure);
+            self.sensors.set(row, "humidity", results.humidity);            
 
             //console.log(id + " " + aqi + " " + self.nSensorsUpdated + " " + self.nSensors);
         }
