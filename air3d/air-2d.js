@@ -183,7 +183,7 @@ function drawOverlay()
 }
 
 function windowResized() {
-    resizeCanvas(windowWidth, canvasHeight);
+    resizeCanvas(windowWidth, canvasHeight * 2);
   }
 
 class PurpleAir 
