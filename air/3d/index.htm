@@ -16,6 +16,7 @@
 
         body /* Required for proper anchoring of overlays in procedural-gl.js */
         {
+          background: #666666;
           font-family: 'Inter', sans-serif;
         }
 
@@ -28,12 +29,12 @@
         #gl /* div for GLSL canvas */
         {
           width: 100%;
-          height: 90%;
+          height: 85%;
           position: relative;
         }
         #p5  /* div for p5.js canvas */
         {
-          position: relative; 
+          position: relative;
         }
 
     </style>
@@ -44,7 +45,9 @@
     </body>
 
     <!-- Configuration -->
+    
     <script type="text/javascript" src="js/config.js"></script>        
+    
 
     <!-- GL SL -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -52,10 +55,12 @@
     <script type="text/javascript" src="js/air-3d.js"></script>
 
     <!-- p5.js for main logic -->
+    <script type="text/javascript" src="js/p5_extra.js"></script>    
     <script type="text/javascript" src="js/airquality.js"></script>
     <script type="text/javascript" src="js/air.js"></script>
     <script type="text/javascript" src="js/features.js"></script>
-    <script type="text/javascript" src="js/air-2d.js"></script>
+    <script type="text/javascript" src="js/observations.js"></script>
+    <script type="text/javascript" src="js/interface_time_series.js"></script>
 
 </html>
 
