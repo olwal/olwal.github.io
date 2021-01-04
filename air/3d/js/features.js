@@ -119,11 +119,11 @@ class Features
     return o;
   }
 
-  static getBayAreaFeatures(cities)
+  static getBayAreaFeatures(featureCollectionName, cities, city = undefined)
   {   
     let o = {};
     o.type = "FeatureCollection";
-    o.name = "cities";
+    o.name = featureCollectionName;
     /*o.defaults = {
       "properties": {
         "color": "white",
@@ -149,17 +149,27 @@ class Features
 
     for (let row of cities.rows)
     {
-/*      count += 1;
-      if (count > 10)
-        break;
-*/
-      if (row.arr[3] == '0')
+      let name = row.arr[0];
+      let show = row.arr[3];
+
+      if (show == '0' && (city == undefined || name != city))
         continue;
 
-      let name = row.arr[0];
+      let textColor = "rgba(255, 255, 255, 0.8)";
+
+      if (city != undefined)
+      {
+        textColor = (name == city) ? "rgba(255, 255, 255, 1)" : "rgba(240, 240, 240, 0.8)";
+        
+        if (name == city)
+        {
+          //name = "[ " + name + " ]";
+          //show = '1';
+        }      
+      }
+      
       let latitude = parseFloat(row.arr[1]);
       let longitude = parseFloat(row.arr[2]);
-      let show = row.arr[3];
 
       let feature = {
         "geometry": {
@@ -170,7 +180,7 @@ class Features
         "id": count,
         "properties": {
           "fontSize": 10 + (50 / (show * show)),
-          "color": "white",        
+          "color": textColor,        
           "name": name,
           "anchorOffset": {
             "y": 0,
