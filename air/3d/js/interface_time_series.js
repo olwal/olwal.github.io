@@ -75,34 +75,38 @@ function setup()
             END_DATE_STRING = end_string;
         }
     }
-    
+
+    //if city was specified, try to match it in city table
     if (city != undefined)
     {
-        city = city.replace(/%20/g, " ");
-        let rows = cities.findRows(city, "name");
-
+        city = city.replace(/%20/g, " "); //replace %20 characters from URL
+        let rows = cities.findRows(city, "name"); //look up all matches
         let row = undefined;
 
         for (r of rows)
         {
-            print(rows);
-            if (r.get("name") == city)
+            if (r.get("name") == city) //make sure that the whole string matches
             {
-                city = r.get("name");
                 row = r;
                 break;
             }
         }
 
-        print(row);
-
-        if (row != undefined)
+        //if exact match succeeded, set long/lat (overwriting potential URL parameters)
+        if (row != undefined) 
         {
             latitude = parseFloat(row.get("latitude"));
             longitude = parseFloat(row.get("longitude"));
         }
     }
-    else 
+
+    //check if URL parameters were valid, otherwise use default value
+    longitude = isNaN(longitude) ? DEFAULT_LONGITUDE : longitude;
+    latitude = isNaN(latitude) ? DEFAULT_LATITUDE : latitude;
+    
+    //if no city was specified, but long/lat was, then add them to the table, 
+    //to generate a label that can be shown
+    if (city == undefined)  
     {
         city = longitude.toFixed(2) + ", " + latitude.toFixed(2);
 
@@ -113,12 +117,17 @@ function setup()
         row.setNum('show', 2);
     }
 
-    longitude = isNaN(longitude) ? DEFAULT_LONGITUDE : longitude;
-    latitude = isNaN(latitude) ? DEFAULT_LATITUDE : latitude;
     distance = isNaN(distance) ? DEFAULT_DISTANCE : distance;
     radius = isNaN(radius) ? DEFAULT_RADIUS : radius;
-    
-    console.log(radius + " " + distance + " " + binaries.length);
+
+    console.log("date start: " + START_DATE_STRING);
+    console.log("date end: " + END_DATE_STRING);    
+    console.log("longitude: " + longitude);
+    console.log("latitude: " + latitude);
+    console.log("radius: " + radius);
+    console.log("distance: " + distance);
+    console.log("city: " + city);
+    console.log("# of files to load: " + binaries.length);
 
     //create p5.js canvas
     let can = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
