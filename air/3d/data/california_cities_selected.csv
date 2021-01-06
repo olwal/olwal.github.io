@@ -923,7 +923,7 @@ Mountain House,37.77,-121.55,0
 Mountain Mesa,35.64,-118.4,0
 Mountain Ranch,38.25,-120.51,0
 Mountain View Acres,34.5,-117.35,0
-Mountain View,38.01,-122.12,0
+# Mountain View,38.01,-122.12,0
 Mountain View,37.4,-122.08,2
 Muir Beach,37.87,-122.59,0
 Murphys,38.14,-120.43,0
@@ -1522,4 +1522,6 @@ Yuba City,39.14,-121.64,0
 Yucaipa,34.03,-117.04,0
 Yucca Valley town,34.12,-116.42,0
 Zayante,37.09,-122.04,0
-
+LNU Lightning Complex Fires,38.549,-122.506,1
+CZU Lightning Complex Fires,37.262,-122.223,1
+SCU Lightning Complex Fires,37.882,-121.777,1
