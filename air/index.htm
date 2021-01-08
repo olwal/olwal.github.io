@@ -1,17 +1,129 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+	<title>COVID-19 Visualizations - Alex Olwal, Ph.D.</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<link rel="stylesheet" type="text/css" href="index_files/balloontip.css">
+	<link rel="stylesheet" type="text/css" href="index_files/links_styles.css">
+			
+	<script type="text/javascript" src="index_files/balloontip.js">
+	/***********************************************
+	* Rich HTML Balloon Tooltip- Dynamic Drive DHTML code library (www.dynamicdrive.com)
+	* This notice MUST stay intact for legal use
+	* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+	***********************************************/
+	</script>
 
-<head>
-	<title>Air quality monitor</title>
-	<script src="lib/p5.min.js"></script>
-	<script src="air.js"></script>
-	<script src="lib/conc-aqi.js"></script>
-	<script src="lib/p5.geolocation.js"></script>
-	<script src="lib/mappa.min.js"></script>
-	<script src="lib/p5.clickable.js"></script>
+	<script type="text/javascript" src="index_files/functions.js"> </script>
+
+	<script src="index_files/jquery.js" type="text/javascript"></script>	
+	
+	  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+	  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+	  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+	  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+	
+	<link href="index_files/styles.css" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" type="text/css" href="index_files/styles_002.css">
+
+	
 </head>
+<body id="top_of_page">
 
-<body>
-    <main>
-    </main>
-  </body>
-</html>
+<table class="border" width="1340" cellspacing="10" cellpadding="0" border="0" align="center">
+<tbody><tr>
+		
+		<td class="statement">I design and develop interactions and 
+technologies that embrace digital and physical experiences. 
+		I am specifically interested in tools, techniques and devices that 
+enable new interaction concepts for the augmentation and empowerment of 
+human abilities. This includes 3D user interfaces, interaction 
+techniques, augmented reality, mixed reality, virtual reality, 
+ubiquitous computing, mobile devices, novel interfaces for medical 
+imaging, multimodal systems, touch-screen interaction, and 
+software/hardware prototyping.
+		<br><br><br><!-- br>
+		The research projects are inspiring collaborations at different research labs and institutions, including <a target="_blank" href="http://www.media.mit.edu/">MIT</a>, <a target="_blank" href="http://www.cs.columbia.edu/graphics/home/">Columbia University</a>, <a target="_blank" href="http://ilab.cs.ucsb.edu/">University of California</a>, <a target="_blank" href="http://kth.se/csc">KTH (Royal Institute of Technology)</a>, and <a href="http://research.microsoft.com/en-us/groups/adapt/" target="_blank">Microsoft Research</a>. I have taught at Stanford University, Rhode Island School of Design and KTH. <br><br>
+-->
+
+	<a class="navigationLinks" href="http://olwal.com/research">Research&nbsp;Projects&nbsp;»</a>
+	
+	<a class="navigationLinks" href="http://olwal.com/publications">Publications&nbsp;»</a>
+	
+<!--
+	<a class="navigationLinks" href="?content=media">Popular&nbsp;Press&nbsp;&raquo;</a>
+-->
+	<a class="navigationLinks" href="http://olwal.com/scholar">Google Scholar&nbsp;»</a>
+
+	<a class="navigationLinks" href="http://github.com/olwal">Github&nbsp;»</a>
+	
+	</td>
+
+	<td class="details" valign="top" align="right">
+			<a href="http://www.olwal.com/" class="details">
+			Alex Olwal, Ph.D.<br>
+		</a>
+			Sr&nbsp;Research&nbsp;Scientist,&nbsp;Google<br>
+			olwal&nbsp;[at]&nbsp;acm.org<br>
+	</td>	
+	<td width="0" valign="top" align="right">
+		<span class="details">		
+			<img src="index_files/alex_olwal_70_70_color.jpg" alt="Alex Olwal" width="70" height="70">
+		</span>
+	</td>	
+
+
+	<!-- td align="right" valign="top">
+		<img class="border" src="images/alex.jpg" border="1" alt="Alex Olwal">
+	</td -->		
+</tr>
+</tbody></table>	
+			<br id="research_projects">
+		<table class="border" width="1340" cellspacing="10" cellpadding="0" border="0" align="center">
+
+
+ 
+			<tbody>
+			<tr>
+				<td class="themeTitle" colspan="4">2D and 3D air quality sensor visualizations</td>				
+			</tr>		
+				<tr>
+					<td>				
+						[<a href="https://github.com/olwal/air">Github repository</a>]&nbsp;&nbsp;&nbsp;<br/><br/>
+
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="https://github.com/olwal/air">Interactive Air Quality in 3D | 2020: Air Quality Year in Review</a><br><br>
+						<img src="media/sf_pan.gif"> <img src="media/sf_pan_2.gif"> <br> <img src="media/alameda.gif"> 
+						<img src="media/napa.gif"> <br> <img src="media/santa_clara.gif"> <img src="media/santa_cruz.gif"><br>
+						<br><br>
+					</td>
+					<td>
+						<a href="monitor">Real-time monitor to show data from the 10 closest air quality sensors</a><br><br>
+						<a href="monitor"><img src="images/monitor.png"/></a>
+
+					</td>
+				</tr>
+
+			</tbody>
+			
+						
+				
+	</tbody></table>
+
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+sc_project=2257314; 
+sc_invisible=1; 
+sc_partition=20; 
+sc_security="cbf0a961"; 
+</script>
+
+<script type="text/javascript" src="index_files/counter.js"></script><noscript><div class="statcounter"><a title="web stats" href="http://www.statcounter.com/" target="_blank"><img class="statcounter" src="http://c21.statcounter.com/2257314/0/cbf0a961/1/" alt="web stats" ></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+</body></html>
