@@ -3,7 +3,7 @@ body
 /*	background-color: #eeeeee;	background-color: #ffffff;	background-color: #dddddd;
 	background-color: #2d313a;	background-image: url("images/bg_01.jpg");	background-color: #DAE3E6; */
 	
-background-color: #eeeeee;
+background-color: #dadada;
 }
 
 table.border,
@@ -55,11 +55,11 @@ td, p, a
 .navigationLinks	/* buttons for the different pages */
 {	
 	font-family: Inter, Tahoma, Verdana;
-	text-transform: uppercase;
-	font-size: normal;
+	/* text-transform: uppercase; */
+	font-size: medium;
 	color: #FFFFFF;
 	padding: 5px;
-	background-color: #C0C0C0;	
+	background-color: #000000;	
 }
 
 .navigationLinks:hover
@@ -72,17 +72,17 @@ td, p, a
 
 .themeTitle	/* title for each horizontal section */
 {
-	font-family: Tahoma, Verdana;
+	font-family: Inter, Tahoma, Verdana;
 	/* text-transform: uppercase; */
 	/* font-size: medium; */
-	color: #FFFFFF;
+	color: #000000;
 	
 	padding: 5px;
-	background-color: #6BB4E8;
-	text-transform: uppercase;
-	font-size: normal;
-	font-weight: normal;
+/*	text-transform: uppercase;*/
+	font-size: x-large;
+	font-weight: bolder;
 }
+
 
 /* --- PROJECT --- */
 
@@ -93,9 +93,9 @@ td, p, a
 {	
 	font-size: small;	
 	color: #999999;
-	text-transform: uppercase;
+/*	text-transform: uppercase;*/
 /*	background-color: #999999; */
-	font-family: Tahoma, Verdana;
+	font-family: Inter, Tahoma, Verdana;
 	padding: 5px;
 }
 
@@ -106,10 +106,12 @@ td, p, a
 	vertical-align: top;
 }
 
-.publicationTitle,
+.publicationTitle
+{	color: #555555;	}
+
 .conference,
 .videoTitle
-{	color: #888888;	}
+{	color: #555555;	}
 
 .publicationTitle ,
 .videoTitle
@@ -121,7 +123,7 @@ td, p, a
 .pitch
 {
 	font-size: normal;
-	color: #666666;
+	color: #333333;
 }
 
 .pitchLarge
@@ -142,7 +144,7 @@ td, p, a
 .com
 {	
 	font-family: Inter, Tahoma, Verdana;
-	font-size: x-small;	
+	font-size: small;	
 }
 
 a
@@ -153,7 +155,7 @@ a
 
 .details
 {
-	font-size: x-small;
+	font-size: small;
 	text-decoration: none;
 	color: #666666;
 }
@@ -168,7 +170,7 @@ a:hover, .details:hover
 
 .slideText 
 {
-	font-family: Tahoma, Verdana;
+	font-family: Inter, Tahoma, Verdana;
 	font-size: normal;
 	color: #FFFFFF;
 	
@@ -178,7 +180,7 @@ a:hover, .details:hover
 
 .slideTextSmall
 {
-	font-family: Tahoma, Verdana;
+	font-family: Inter, Tahoma, Verdana;
 	font-size: small;
 	color: #FFFFFF;
 	
