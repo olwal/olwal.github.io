@@ -39,21 +39,29 @@ const FEATURE_COLLECTION_NAME_LANDMARKS = "cities";
 
 const DEFAULT_LONGITUDE = -122.44198789673219;
 const DEFAULT_LATITUDE = 37.7591527514897;
-//const DEFAULT_RADIUS = 10000; //m
 const DEFAULT_RADIUS = Math.round(5000 * 1.609); //5 miles in m
 
 const DATASET_START_DATE = "2020-01-01";
 const DATASET_END_DATE = "2021-01-01";
 
+let AUTOPLAY = false; //whether dataset play back starts
+let UPDATE_MS = 500; //inter-frame delay 
+let UPDATE_MULTIPLIER = 1.2;
+
 let DEFAULT_DISTANCE = 20000;
 
 var ORBIT_AFTER_FOCUS = false;
 
+var proceduralLocation; 
+var proceduralLoaded = false;
+
+const MS_TO_DAYS = 24 /* h */ * 60 /* min */ * 60 /* s */ * 1000 /* ms */;
+
 var MAP_TARGET = {
 //    latitude: 37.512070759717645, longitude: -122.29158348430136,
     latitude: 37.7591527514897, longitude: -122.44198789673219,
-    distance: 10000,
-    angle: 35, bearing: 50,
+    distance: 54000,
+    angle: 28, bearing: 225,
     animationDuration: 1,
     location: 'San Francisco'
  //   angle: 35, bearing: 70
@@ -78,7 +86,7 @@ const GL_CONFIGURATION = {
     // Minimum distance camera can approach scene
     minDistance: 1000,
     // Maximum distance camera can move from scene
-    maxDistance: 100000,
+    maxDistance: 1000000,
     // Maximum distance camera target can move from scene
     maxBounds: 75000,
     // Minimum polar angle of camera

@@ -27,10 +27,9 @@ let loadingText = "Loaded";
 let radius = DEFAULT_RADIUS;
 let distance = DEFAULT_DISTANCE;
 let initialized = false;
-let autoplay = true;
-
+let autoplay = AUTOPLAY;
 let timestamp; //keep track of time for animation
-let UPDATE_MS = 100; //inter-frame delay 
+
 
 let play = false;
 let buttons = {};
@@ -126,7 +125,7 @@ function submitFormData(location, radius, start_date, end_date)
 {
     let long = NaN;
     let lat = NaN;
-    let distance = NaN
+    let distance = NaN;
     let doFocus = true;
 
     if (showLive)
@@ -149,7 +148,7 @@ function submitFormData(location, radius, start_date, end_date)
         document.getElementById("start_date").value = year() + "-" + digit(month()) + "-" + digit(day());
         document.getElementById("end_date").value = year() + "-" + digit(month()) + "-" + digit(day());
     
-        Procedural.focusOnLocation(MAP_TARGET);
+        focusOn(MAP_TARGET);
         air.changeLocation(longitude, latitude, radius);
     }
     else
@@ -212,7 +211,7 @@ function setupLive()
         lastUpdated = millis();
     }
 
-    Procedural.focusOnLocation(MAP_TARGET);
+    focusOn(MAP_TARGET);
 }
 
 function drawAnalogTime(r, hours, minutes, seconds, colorDial, colorHour, colorMinute, colorSeconds = undefined)
@@ -518,7 +517,6 @@ function setupTimeSeries()
 
     Procedural.onFeatureClicked = function (id) //clicking on a feature 
     {
-
         console.log("---------------------")
         console.log("[ Clicked " + id + " ]");
 
@@ -578,6 +576,8 @@ function setupTimeSeries()
             return;
         }
 
+        showDetails = true;
+
         console.log("Loading : " + id);
 /*            window.open('https://olwal.github.io/air/3d/?' +
             'start_date=' + START_DATE_STRING + 
@@ -626,6 +626,7 @@ function hideDetailSensorView()
     nLoadedAggregate = observations.length;
     Procedural.removeOverlay(SENSORS_NAME);
     showDetails = false;
+    setObservations(current);
     locationLabels = Features.getBayAreaFeatures(FEATURE_COLLECTION_NAME_LANDMARKS, locations);
     Procedural.addOverlay(locationLabels);
 }
@@ -696,6 +697,14 @@ function getLocationFromTable(location, defaultLongitude = undefined, defaultLat
 function loadData(start_string, end_string, longitude, latitude, _radius, distance, location, doFocus = false)
 {
     showDetails = true;
+   
+    let msCurrent = false;
+    if (observations && observations[current])
+    {
+        currentDate = observations[current].filename.slice(-17, -7); //save current observation
+        msCurrent = Date.parse(currentDate); //to be used when loading data
+        msCurrent += int(observations[current].hour_string * 60 * 1000);
+    }
 
     //if parameters changed reload
     reloadNeeded = start_string != START_DATE_STRING || end_string != END_DATE_STRING ||
@@ -745,7 +754,7 @@ function loadData(start_string, end_string, longitude, latitude, _radius, distan
             Procedural.addOverlay(locationLabels);
 
             if (doFocus)
-                Procedural.focusOnLocation(MAP_TARGET);
+                focusOn(MAP_TARGET);
 
             return;
         }
@@ -818,7 +827,20 @@ function loadData(start_string, end_string, longitude, latitude, _radius, distan
                 if (ms < START_DATE || ms > END_DATE || b.length == 0) //skips this file if it is too early or too late
                     continue;
 
-                count += 1;
+                if (msCurrent)
+                {
+                    ms = ms + b.slice(-6, -4) * 60 * 1000; //add # of hours in ms
+                    let msDiff = ms - msCurrent; 
+                    let dayDiff = msDiff / MS_TO_DAYS;
+                    let dayRange = (END_DATE - START_DATE)/MS_TO_DAYS;
+
+                    if (dayDiff >= 0)
+                        count = 10 * dayDiff;
+                    else
+                        count = 10 * (dayRange + dayRange + dayDiff);
+                }
+                else
+                    count += 10;
 
                 let data = BINARY_DATA_PATH + b; //complete path for file to load                                      
 
@@ -839,7 +861,7 @@ function loadData(start_string, end_string, longitude, latitude, _radius, distan
                                         if (!initialized)
                                         {
                                             //Procedural.displayLocation(MAP_TARGET);
-                                            Procedural.focusOnLocation(MAP_TARGET);
+                                            focusOn(MAP_TARGET);
                                         }
                                        setObservation(current, observations);
                                     }
@@ -847,7 +869,7 @@ function loadData(start_string, end_string, longitude, latitude, _radius, distan
                                     isLoadedComplete();
                                 }    
                             );
-                        }, count * 10); //(count / 100) * 1000);
+                        }, count);
 
                 observations.push(o); //add each Observation object 
             }
@@ -904,9 +926,10 @@ function isLoadedComplete()
     if ((!showDetails || nLoaded == observations.length) &&
         (!reloadNeeded || nLoadedAggregate == observationsAggregate.length))
     {
+        setObservations(current);
+
         if (!initialized)
         {
-            setObservations(current);
             initialized = true;
             Procedural.focusOnLocation(MAP_TARGET);
             if (autoplay)
@@ -918,7 +941,7 @@ function isLoadedComplete()
     }    
 }
 
-function focusOn(longitude, latitude)
+function focusOn(target)
 {
     /*
     let target = {
@@ -928,9 +951,12 @@ function focusOn(longitude, latitude)
         animationDuration: 2
     };    */
 
-    let target = MAP_TARGET;
-    target.longitude = longitude;
-    target.latitude = latitude;
+    if (proceduralLocation)
+    {
+        target.distance = proceduralLocation.distance;
+        target.bearing = proceduralLocation.bearing;
+        target.angle = proceduralLocation.angle;
+    }
 
     Procedural.focusOnLocation(target);
 }
@@ -1002,11 +1028,13 @@ function keyPressed() //handle keyboard presses
                 Procedural.removeOverlay(FEATURE_COLLECTION_NAME_LANDMARKS);
 
         case 'x': 
-            UPDATE_MS /= 2;
+            UPDATE_MS /= UPDATE_MULTIPLIER;
+            console.log(UPDATE_MS);            
             break;
 
         case 'X': 
-            UPDATE_MS *= 2;     
+            UPDATE_MS *= UPDATE_MULTIPLIER;     
+            console.log(UPDATE_MS);            
             break;
 
         case 's':
@@ -1040,13 +1068,11 @@ function keyPressed() //handle keyboard presses
             break;
 
         case 'f': //focus on default location
-            Procedural.focusOnLocation(MAP_TARGET);
+            focusOn(MAP_TARGET);
             break;
 
         case 'u': //focus on default location
-            ORBIT_AFTER_FOCUS = false;
-            console.log(MAP_TARGET_0);
-            Procedural.focusOnLocation(MAP_TARGET_0);
+            focusOn(MAP_TARGET_0);
             break;            
     }
 }
@@ -1155,7 +1181,7 @@ function drawTimeSeries()
            line(x + cursorWidth/2, maxHeight, x + cursorWidth/2, maxHeight * 2);
            noStroke();
            fill(o.rgb[0], o.rgb[1], o.rgb[2]);
-           ellipse(x + cursorWidth/2, maxHeight, cursorWidth/3);           
+           ellipse(x + cursorWidth/2, maxHeight, maxHeight/5);           
         }
 
 
@@ -1242,7 +1268,10 @@ function drawTimeSeries()
         let r = pad * 3;
 
         let hours = int(oc.hour_string);
-        let minutes = UPDATE_MS < 400 ? 0 : 60 * (deltaT / UPDATE_MS);
+        let minutes = 0;
+        
+        if (play && UPDATE_MS < 400) //if running and inbetween values, interpolate minutes
+            minutes = 60 * (deltaT / UPDATE_MS);
 
         let pm = hours >= 12;
 
@@ -1286,8 +1315,8 @@ function setObservation(index, observations) //set current observation
         current = index;
 
         let json;
-        
-        if (observations == observationsAggregate && showDetails)
+    
+        if ((observations == observationsAggregate) && showDetails)
             json = observations[current].jsonInactive;
         else
             json = observations[current].json;
