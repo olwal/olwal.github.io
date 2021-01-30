@@ -39,13 +39,14 @@ const FEATURE_COLLECTION_NAME_LANDMARKS = "cities";
 
 const DEFAULT_LONGITUDE = -122.44198789673219;
 const DEFAULT_LATITUDE = 37.7591527514897;
-const DEFAULT_RADIUS = Math.round(5000 * 1.609); //5 miles in m
+const KM_TO_MILES = 1.609;
+const DEFAULT_RADIUS = Math.round(5000 * KM_TO_MILES); //5 miles in m
 
 const DATASET_START_DATE = "2020-01-01";
 const DATASET_END_DATE = "2021-01-01";
 
 let AUTOPLAY = false; //whether dataset play back starts
-let UPDATE_MS = 500; //inter-frame delay 
+let UPDATE_MS = 100; //inter-frame delay 
 let UPDATE_MULTIPLIER = 1.2;
 
 let DEFAULT_DISTANCE = 20000;
@@ -101,10 +102,21 @@ const GL_CONFIGURATION = {
     noZoom: false
 };
 
-const GL_ENVIRONMENT = {
+var GL_ENVIRONMENT = {
     title: 'custom',
     parameters: {
-        inclination: 45,
-        fogDropoff: 0.000
+//        inclination: 45,
+//        fogDropoff: 0.000
+        "turbidity": 2.928118393234672,
+        "reileigh": 0.631430584918957,
+        "mieCoefficient": 0.005962433224194382,
+        "mieDirectionalG": 0.1037394451145959,
+        "luminance": 1.0236084783732553,
+        "inclination": 0.5350336033086335,
+        "azimuth": 0.881,
+        "fogDropoff": 0,
+        "fogIntensity": 1,
+        "exposureBias": 1.25,
+        "whitePoint": 2.5
     }
 };
