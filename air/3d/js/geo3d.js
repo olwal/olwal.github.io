@@ -7,6 +7,8 @@
     Externally defined constants/global variables in config.js
 */
 
+//import Procedural from '../lib/procedural-gl.dev.js';
+
 const container = document.getElementById(DIV_GL);
 
 //tile servers: https://wiki.openstreetmap.org/wiki/Tile_servers
@@ -45,16 +47,40 @@ else
 //initialize with container and data sources
 Procedural.init( {container, datasource} );
 
-
-
 window.Procedural = Procedural;
 
-//start orbiting after location is focused
+//doesn't seem to fire
+Procedural.onLocationLoaded = 
+  function()
+  {
+    console.log("Location loaded");
+    Procedural.focusOnLocation(MAP_TARGET);
+  };
+
 Procedural.onLocationFocused = 
   function () 
   {
     if (ORBIT_AFTER_FOCUS)
       Procedural.orbitTarget();
+
+    if (!proceduralLoaded)
+    {
+    
+      Procedural.onCameraChange = function ( location ) {
+        // `location` will contain:
+        // - longitude
+        // - latitude
+        // - height
+        // - angle
+        // - bearing
+        // - distance
+      
+        
+      //console.log( 'Location changed' + location );
+        proceduralLocation = location; 
+        
+      };
+    }
   };
 
 //use externally defined settings to set up camera, rendering and location
