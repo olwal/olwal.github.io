@@ -39,7 +39,21 @@ class FaceTracker
 	setupCamera(width, height) 
 	{
 		// Setup camera capture
-		let videoInput = createCapture(VIDEO);
+		let constraints = {
+			video: {
+			  mandatory: {
+				minWidth: width,
+				minHeight: height
+			  },
+			  facingMode: {
+				exact: "user"
+			  }
+			},
+			audio: false
+		  };
+
+		//let videoInput = createCapture(VIDEO);
+		let videoInput = createCapture(constraints);
 		videoInput.size(width, height);
 		videoInput.position(0, 0);
 
