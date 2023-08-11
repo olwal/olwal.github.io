@@ -15,6 +15,7 @@ const container = document.getElementById(DIV_GL);
 //map tiler: https://cloud.maptiler.com/account/keys/
 //preview of tile servers: https://leaflet-extras.github.io/leaflet-providers/preview/
 
+/* This method does not work anymore as nasadem.xyz doesn't work
 //configure data sources for elevation and map imagery
 let useEsri = false;
 
@@ -42,6 +43,11 @@ else
       attribution: '<a href="https://www.maptiler.com/copyright/">Maptiler</a> <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }
   }
+}
+*/
+var datasource = {
+  provider: 'maptiler',
+  apiKey: API_KEY_MAP_TILER
 }
 
 //initialize with container and data sources
