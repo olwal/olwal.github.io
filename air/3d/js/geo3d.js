@@ -16,7 +16,7 @@ const container = document.getElementById(DIV_GL);
 //preview of tile servers: https://leaflet-extras.github.io/leaflet-providers/preview/
 
 //configure data sources for elevation and map imagery
-let useEsri = true;
+let useEsri = false;
 
 if (useEsri)
 {
